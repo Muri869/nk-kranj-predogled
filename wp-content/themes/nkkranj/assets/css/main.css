@@ -280,7 +280,21 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
 /* =====================================================================
    MATCH CENTER
    ===================================================================== */
-.match-center { background: var(--c-ink); color: var(--c-white); position: relative; margin-top: -1px; padding: clamp(2.4rem, 5vw, 3.6rem) 0; }
+/* Rdeč pas (slog FC Bayern): naslednja tekma / rezultati na močni klubski rdeči. */
+.match-center { background: linear-gradient(150deg, var(--c-red) 0%, var(--c-red-dark) 100%); color: var(--c-white); position: relative; margin-top: -1px; padding: clamp(2.4rem, 5vw, 3.6rem) 0; }
+/* Elementi, ki so bili rdeči, bi na rdeči podlagi izginili → beli. Kartice ostanejo
+   temne (črno na rdeči = klubski kontrast). */
+.match-center .eyebrow { color: var(--c-white); opacity: 0.9; }
+.match-center .section__link { color: var(--c-white); }
+.match-center .section__link:hover { text-decoration: underline; text-underline-offset: 4px; }
+.match-center .section__title::before { background: var(--c-white); }
+.match-center .countdown__label { color: var(--c-white); opacity: 0.92; }
+.match-center .countdown__label::before { background: var(--c-white); }
+.match-center .countdown__lbl { color: rgba(255,255,255,0.82); }
+.match-center .countdown__sep { color: var(--c-white); }
+.match-center .match-center__note { color: rgba(255,255,255,0.8); }
+.match-center .match-carousel__arrow { background: var(--c-white); color: var(--c-red); }
+.match-center .match-carousel__arrow:hover { background: var(--c-ink); color: var(--c-white); }
 .match-center__head { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.8rem; }
 @keyframes nkkPulse { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(226,0,26,0.5); } 50% { opacity: 0.6; box-shadow: 0 0 0 5px rgba(226,0,26,0); } }
 
