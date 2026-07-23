@@ -427,8 +427,8 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
 .koledar--velik .koledar__mreza th { font-size: 0.7rem; }
 .section--koledar {
 	background:
-		linear-gradient(180deg, rgba(11,12,16,0.82) 0%, rgba(11,12,16,0.88) 100%),
-		url('../img/stadion-zarometi.jpg');
+		linear-gradient(180deg, rgba(11,12,16,0.80) 0%, rgba(11,12,16,0.87) 100%),
+		url('../img/stadium-2.jpg');
 	background-size: cover; background-position: center;
 	color: var(--c-white); padding-block: clamp(2rem, 4vw, 3.5rem);
 }
@@ -1646,8 +1646,9 @@ body {
 	color: var(--c-white);
 }
 .section--dont-miss .eyebrow { color: var(--c-white); opacity: 0.9; }
-.section--dont-miss .section__title::before { background: var(--c-white); }
-.section--dont-miss .section__title { text-shadow: none; }
+/* Višja specifičnost od osnovnega pravila za rdečo črtico, sicer ostane rdeča na rdeči. */
+.section--dont-miss .section__head:not(.section__head--center) .section__title::before { background: var(--c-white); }
+.section--dont-miss .section__head:not(.section__head--center) .section__title { text-shadow: none; }
 /* Rdeč pas NE PREZRITE naj tesno objame svoje vrstice (ne previsok prazen pas). */
 .section--dont-miss { padding-block: clamp(2.6rem, 5vw, 4rem); }
 
