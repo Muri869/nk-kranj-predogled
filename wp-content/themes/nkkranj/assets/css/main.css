@@ -1616,44 +1616,16 @@ body {
 	body { background-attachment: scroll; }
 }
 
-/* =====================================================================
-   RDEČ PAS: VAŠA PODPORA (0,5 % dohodnine)
-   Čustven poziv k podpori — rdeč blok razbije črnino v spodnjem delu
-   (ritem črno–rdeče–črno, slog FC Bayern). Rdeči elementi → beli.
-   ===================================================================== */
-.section--donate { background: linear-gradient(150deg, var(--c-red) 0%, var(--c-red-dark) 100%); color: var(--c-white); }
-.section--donate .eyebrow { color: var(--c-white); opacity: 0.9; }
-.section--donate .section__title::before { background: var(--c-white); }
-.section--donate .section__title { text-shadow: none; }
-.section--donate .donate__lead { color: rgba(255,255,255,0.92); }
-.section--donate .donate__q summary:hover,
-.section--donate .donate__q[open] summary { color: var(--c-white); text-decoration: underline; text-underline-offset: 3px; }
-.section--donate .donate__q summary::before,
-.section--donate .donate__q summary::after { background: var(--c-white); }
-.section--donate .btn--primary { background: var(--c-white); color: var(--c-red); }
-.section--donate .btn--primary:hover { background: var(--c-ink); color: var(--c-white); }
-/* Grb kot vodni žig malce vidnejši na rdeči. */
-.section--donate::after { opacity: 0.08; }
+/* Umik odvečne rdeče: donate, sponzorji in lestvica ostanejo ČRNI (preveč
+   rdečih pasov skupaj). Rdeča ostane le pri "tekma/športnih" trenutkih. */
 
 /* =====================================================================
-   RDEČ PAS: SPONZORJI (zaključni pas pred nogo)
-   Bele ploščice na rdeči — čist, klubski zaključek. Obrnjen preliv, da je
-   ob stiku z donate pasom viden šiv (rdeča→temno-rdeča→rdeča). Vsebinske
-   sekcije z novicami/selekcijami ostanejo črne.
+   RDEČ PAS: NE PREZRITE
+   Poudarek pomembnih novic — temne vrstice na rdeči (kot rezultati).
+   Da ritem v zgornjem delu ni ves črn: rezultati(rdeč)–novice(črno)–
+   NE PREZRITE(rdeč)–selekcije(črno)–nog. šola(rdeč).
    ===================================================================== */
-.section--sponsors { background: linear-gradient(150deg, var(--c-red-dark) 0%, var(--c-red) 100%); color: var(--c-white); }
-.section--sponsors .eyebrow { color: var(--c-white); opacity: 0.9; }
-.section--sponsors .section__title::before { background: var(--c-white); }
-.section--sponsors .section__title { text-shadow: none; }
-/* Na rdeči je »bela« ploščica prava bela z rahlo senco; grbov vodni žig ne rabimo. */
-.section--sponsors .sponsor-logo { box-shadow: 0 8px 22px rgba(0,0,0,0.28); }
-
-/* =====================================================================
-   RDEČ PAS: LESTVICA (stran Tekme)
-   Da /tekme ni vsa črna — temna kartica lestvice na rdeči (kot rezultati
-   na domači). Notranjost tabele ostane nespremenjena.
-   ===================================================================== */
-.section--lestvica { background: linear-gradient(150deg, var(--c-red) 0%, var(--c-red-dark) 100%); color: var(--c-white); }
-.section--lestvica .eyebrow { color: var(--c-white); opacity: 0.9; }
-.section--lestvica .section__title::before { background: var(--c-white); }
-.section--lestvica .section__title { text-shadow: none; }
+.section--dont-miss { background: linear-gradient(150deg, var(--c-red) 0%, var(--c-red-dark) 100%); color: var(--c-white); }
+.section--dont-miss .eyebrow { color: var(--c-white); opacity: 0.9; }
+.section--dont-miss .section__title::before { background: var(--c-white); }
+.section--dont-miss .section__title { text-shadow: none; }
