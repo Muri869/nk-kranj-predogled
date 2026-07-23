@@ -286,7 +286,7 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
    globina, ne plosko rdeče (isti prijem kot pas nogometne šole). */
 .match-center {
 	background:
-		linear-gradient(150deg, rgba(212,3,30,0.85) 0%, rgba(140,2,20,0.90) 100%),
+		linear-gradient(150deg, rgba(212,3,30,0.80) 0%, rgba(140,2,20,0.86) 100%),
 		url('../img/stadium-1.jpg');
 	background-size: cover; background-position: center;
 	color: var(--c-white); position: relative; margin-top: -1px; padding: clamp(2.4rem, 5vw, 3.6rem) 0;
@@ -320,6 +320,11 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
 /* Vrtiljak tekem */
 .match-carousel { position: relative; }
 .match-carousel__track { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-bottom: 0.25rem; }
+/* Desni rob zbledi, da zadnja (delna) kartica ni ostro odrezana — bere kot
+   "več, podrsaj", ne kot napaka. Puščica (›) ostane zunaj traku, torej ostra. */
+@media (min-width: 641px) {
+	.match-carousel__track { -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 86%, transparent 99%); mask-image: linear-gradient(90deg, #000 0%, #000 86%, transparent 99%); }
+}
 .match-carousel__track::-webkit-scrollbar { display: none; }
 .fixture-card { scroll-snap-align: start; flex: 0 0 clamp(280px, 32%, 360px); display: flex; gap: 1rem; align-items: stretch; background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-xl); overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.25); transition: border-color 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.35s var(--ease); }
 .fixture-card:hover { border-color: rgba(212,3,30,0.55); transform: translateY(-3px); box-shadow: 0 16px 34px rgba(0,0,0,0.4); }
@@ -1232,7 +1237,7 @@ a.sponsor-logo { cursor: pointer; }
 .lightbox__counter { position: absolute; bottom: 1.4rem; left: 50%; transform: translateX(-50%); font-family: var(--font-head); letter-spacing: 0.1em; font-size: 0.85rem; color: rgba(255,255,255,0.8); }
 
 /* Semafor posamezne tekme */
-.match-hero { padding-top: calc(var(--header-h) + clamp(3rem, 7vw, 5rem)); padding-bottom: clamp(2.5rem, 5vw, 4rem); background: linear-gradient(150deg, rgba(212,3,30,0.85) 0%, rgba(140,2,20,0.90) 100%), url('../img/stadium-1.jpg'); background-size: cover; background-position: center; text-align: center; }
+.match-hero { padding-top: calc(var(--header-h) + clamp(3rem, 7vw, 5rem)); padding-bottom: clamp(2.5rem, 5vw, 4rem); background: linear-gradient(150deg, rgba(212,3,30,0.80) 0%, rgba(140,2,20,0.86) 100%), url('../img/stadium-1.jpg'); background-size: cover; background-position: center; text-align: center; }
 .match-hero__board { display: flex; align-items: center; justify-content: center; gap: clamp(1rem, 5vw, 3rem); margin-top: 1rem; }
 .match-hero__team { font-family: var(--font-head); text-transform: uppercase; font-size: clamp(1.4rem, 4vw, 2.6rem); color: #fff; flex: 1; }
 .match-hero__score { font-family: var(--font-head); font-size: clamp(2.5rem, 7vw, 4.5rem); color: #fff; }
@@ -1500,7 +1505,7 @@ a.sponsor-logo { cursor: pointer; }
 .season-archive .readmore__content { max-height: 60vh; }
 
 /* ---------- Velik odštevalnik na arhivu tekem ---------- */
-.match-countdown-hero { position: relative; padding: clamp(2.4rem, 6vw, 4.5rem) 0; text-align: center; overflow: hidden; background: linear-gradient(150deg, rgba(212,3,30,0.85) 0%, rgba(140,2,20,0.90) 100%), url('../img/stadium-1.jpg'); background-size: cover; background-position: center; border-block: 1px solid rgba(255,255,255,0.12); }
+.match-countdown-hero { position: relative; padding: clamp(2.4rem, 6vw, 4.5rem) 0; text-align: center; overflow: hidden; background: linear-gradient(150deg, rgba(212,3,30,0.80) 0%, rgba(140,2,20,0.86) 100%), url('../img/stadium-1.jpg'); background-size: cover; background-position: center; border-block: 1px solid rgba(255,255,255,0.12); }
 .match-countdown-hero__bg { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,0.12), transparent 60%); }
 /* Rdeč pas: rdeči/sivi elementi odštevalnika bi izginili → beli. */
 .match-countdown-hero .countdown__label, .match-countdown-hero .countdown__sep { color: var(--c-white); }
@@ -1640,7 +1645,7 @@ body {
    ===================================================================== */
 .section--dont-miss {
 	background:
-		linear-gradient(150deg, rgba(212,3,30,0.85) 0%, rgba(140,2,20,0.90) 100%),
+		linear-gradient(150deg, rgba(212,3,30,0.80) 0%, rgba(140,2,20,0.86) 100%),
 		url('../img/stadium-1.jpg');
 	background-size: cover; background-position: center;
 	color: var(--c-white);
