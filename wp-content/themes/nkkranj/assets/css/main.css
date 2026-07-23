@@ -17,6 +17,18 @@
 	--c-red-text: #ff2a3d; /* svetlejša rdeča za majhno besedilo na temni podlagi (5.26:1) */
 	--c-gray-700: #3a3d45;
 
+	/* --- Svetla tema: pomenski žetoni (privzeto = svetla podlaga) --- */
+	--surface: #ffffff;        /* kartice, vrstice, obrazci */
+	--surface-2: #f5f6f8;      /* sekcijska ozadja (alt) */
+	--surface-3: #eaecf0;      /* vdolbine */
+	--ink-1: #0b0c10;          /* naslovi, krepko */
+	--ink-2: #2f333b;          /* telo besedila */
+	--muted: #5c616b;          /* sekundarno besedilo (≥4.5:1 na beli) */
+	--line: rgba(11,12,16,0.12);
+	--line-2: rgba(11,12,16,0.07);
+	--link: #b30015;           /* rdeča povezava/majhno rdeče besedilo na svetli (≥6:1) */
+	--hover-tint: rgba(11,12,16,0.04);
+
 	--font-head: "Oswald", "Arial Narrow", system-ui, sans-serif;
 	--font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 	/* Samo za velike hero naslove. Oswald Bold ne doseže ultra-kondenzirano
@@ -49,10 +61,29 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
 	margin: 0;
 	font-family: var(--font-body);
-	color: #e7e8ec;
-	background: var(--c-ink);
+	color: var(--ink-2);
+	background: var(--surface);
 	line-height: 1.6;
 	overflow-x: hidden;
+}
+/* --- Temni sidrni pasovi: hero, pas s tekmo, noga ostanejo temni. --- */
+.hero-carousel, .hero, .match-center, .site-footer, .cta-band,
+.single__hero, .page__hero, .page-lead, .match-hero, .error-404,
+.match-countdown-hero, .cookie-banner, .lightbox,
+.site-header, .mobile-nav {
+	--surface: var(--c-ink-soft);
+	--surface-2: var(--c-ink-soft);
+	--surface-3: #1c1f29;
+	--ink-1: #ffffff;
+	--ink-2: rgba(255,255,255,0.82);
+	--muted: rgba(255,255,255,0.60);
+	--line: rgba(255,255,255,0.12);
+	--line-2: rgba(255,255,255,0.07);
+	--link: var(--c-red-text);
+	--hover-tint: rgba(255,255,255,0.06);
+	/* Podedovano besedilo znotraj temnih pasov je svetlo (sicer bi .hero-carousel
+	   in podobni brez lastne barve podedovali temno telo strani). */
+	color: var(--ink-2);
 }
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-decoration: none; }
@@ -62,7 +93,7 @@ a { color: inherit; text-decoration: none; }
 :focus-visible { outline: 3px solid var(--c-red); outline-offset: 3px; border-radius: 2px; }
 .btn:focus-visible { outline-offset: 4px; }
 .site-nav__list a:focus-visible, .news-card__link:focus-visible, .team-card:focus-visible, .sponsor-logo:focus-visible { outline-offset: 2px; }
-h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1.04; margin: 0 0 0.4em; text-transform: uppercase; letter-spacing: 0.01em; color: #fff; }
+h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1.04; margin: 0 0 0.4em; text-transform: uppercase; letter-spacing: 0.01em; color: var(--ink-1); }
 
 .container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
 
@@ -79,7 +110,7 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
 .eyebrow {
 	display: inline-block; font-family: var(--font-head); font-weight: 600;
 	text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.8rem;
-	color: var(--c-red-text); margin-bottom: 0.75rem;
+	color: var(--link); margin-bottom: 0.75rem;
 }
 .eyebrow--light { color: var(--c-white); opacity: 0.85; }
 
@@ -95,8 +126,8 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
 .btn:active { transform: translateY(0) scale(0.97); }
 .btn--primary { background: var(--c-red); color: var(--c-white); }
 .btn--primary:hover { background: var(--c-red-dark); }
-.btn--ghost { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.55); color: #fff; backdrop-filter: blur(2px); }
-.btn--ghost:hover { background: #fff; border-color: #fff; color: var(--c-ink); }
+.btn--ghost { background: transparent; border-color: var(--ink-1); color: var(--ink-1); backdrop-filter: blur(2px); }
+.btn--ghost:hover { background: var(--ink-1); border-color: var(--ink-1); color: var(--surface); }
 .btn--lg { font-size: 1.05rem; padding: 1em 2em; }
 .btn--block { display: flex; justify-content: center; width: 100%; }
 
@@ -225,6 +256,12 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
 }
 .hero-slide__title a { color: #fff; }
 .hero-slide__excerpt { font-size: clamp(1rem, 1.6vw, 1.2rem); opacity: 0.92; max-width: 52ch; margin: 0 0 1.6rem; text-wrap: pretty; }
+/* --- Bolder znamčni hero: večji, samozavesten naslov + senca za berljivost čez
+   svetlo fotografijo. Foto NAMENOMA ostane svetla (klubska želja); senco nosi
+   besedilo, ne prevleka. Velja le za znamčni slide, ne za novice (dolgi naslovi). --- */
+.hero-slide--branded .hero-slide__title { font-size: clamp(2.4rem, 5.5vw, 3.9rem); letter-spacing: -0.01em; text-shadow: 0 2px 26px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,0.45); }
+.hero-slide--branded .hero-slide__excerpt { color: #fff; opacity: 0.96; font-size: clamp(1.05rem, 1.7vw, 1.3rem); text-shadow: 0 1px 14px rgba(0,0,0,0.6); }
+.hero-slide--branded .hero-slide__eyebrow { color: #fff; opacity: 0.95; text-shadow: 0 1px 10px rgba(0,0,0,0.6); }
 .hero-slide.is-active .hero-slide__content > * { opacity: 0; transform: translateY(20px); animation: heroSlideIn 0.7s var(--ease) forwards; }
 .hero-slide.is-active .hero-slide__content > *:nth-child(1) { animation-delay: 0.15s; }
 .hero-slide.is-active .hero-slide__content > *:nth-child(2) { animation-delay: 0.28s; }
@@ -233,8 +270,8 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
 
 /* Zavihki (kartice novic) z animiranim napredkom */
 .hero-carousel__tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; padding: 1.4rem 0 1.8rem; }
-.hero-tab { position: relative; display: flex; align-items: center; gap: 0.85rem; padding: 0.9rem 1rem; text-align: left; background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; cursor: pointer; transition: border-color 0.3s var(--ease), background 0.3s var(--ease); }
-.hero-tab:hover { background: #1c1f29; }
+.hero-tab { position: relative; display: flex; align-items: center; gap: 0.85rem; padding: 0.9rem 1rem; text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; cursor: pointer; transition: border-color 0.3s var(--ease), background 0.3s var(--ease); }
+.hero-tab:hover { background: var(--hover-tint); }
 .hero-tab.is-active { border-color: rgba(226,0,26,0.35); }
 /* Napredek: rdeča črta, ki teče OKOLI celotne zaobljene kartice. */
 .hero-tab__ring { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
@@ -243,7 +280,7 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
 .hero-tab.is-active .hero-tab__ring rect { stroke-dashoffset: 0; }
 /* Napredek poganja JS (Web Animations API) za zanesljiv samodejni zagon. */
 .hero-tab__thumb { flex: 0 0 auto; width: 52px; height: 52px; border-radius: 4px; background-size: cover; background-position: center; }
-.hero-tab__title { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.02em; font-size: 0.82rem; line-height: 1.25; color: #fff; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.hero-tab__title { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.02em; font-size: 0.82rem; line-height: 1.25; color: var(--ink-1); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 @media (max-width: 900px) { .hero-carousel__tabs { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) {
 	.hero-carousel { min-height: auto; }
@@ -344,13 +381,13 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
    SEKCIJE (splošno)
    ===================================================================== */
 .section { padding-block: clamp(3.5rem, 7vw, 6.5rem); }
-.section--dark, .section--gray { background: var(--c-ink-soft); color: var(--c-white); }
-.section--alt { background: var(--c-ink-soft); }
+.section--dark, .section--gray { background: var(--surface-2); color: var(--ink-2); }
+.section--alt { background: var(--surface-2); }
 .section__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1.5rem; margin-bottom: 2.5rem; }
 .section__head--center { flex-direction: column; align-items: center; text-align: center; }
 .section__title { font-size: clamp(2rem, 4vw, 3.2rem); margin: 0; }
-.section__link { margin-left: auto; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.05em; color: var(--c-red-text); font-weight: 600; }
-.section__head--light .eyebrow { color: var(--c-red-text); }
+.section__link { margin-left: auto; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.05em; color: var(--link); font-weight: 600; }
+.section__head--light .eyebrow { color: var(--link); }
 
 /* =====================================================================
    KOLEDAR TEKEM
@@ -358,13 +395,13 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
    tedna igramo?". Brez JavaScripta — mesec se menja s povezavo, ker klub
    skripte ne bo popravljal, koledar pa mora delati vedno.
    ===================================================================== */
-.koledar { --koledar-doma: var(--c-red); --koledar-gost: rgba(255,255,255,0.4); }
+.koledar { --koledar-doma: var(--c-red); --koledar-gost: color-mix(in srgb, var(--ink-1) 40%, transparent); }
 .koledar__head { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.7rem; }
 .koledar__mesec { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.9rem; }
 .koledar__nav {
 	display: inline-flex; align-items: center; justify-content: center;
 	width: 30px; height: 30px; border-radius: 50%; text-decoration: none;
-	color: var(--c-white); background: rgba(255,255,255,0.08); font-size: 1.1rem; line-height: 1;
+	color: var(--ink-1); background: var(--hover-tint); font-size: 1.1rem; line-height: 1;
 	transition: background 0.2s var(--ease);
 }
 .koledar__nav:hover { background: var(--c-red); }
@@ -375,22 +412,22 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
 .koledar__mreza th {
 	font-family: var(--font-head); font-size: 0.62rem; font-weight: 600;
 	/* 0.6 alfa ≈ 7:1 na temni podlagi (prej 0.45 ≈ pod AA za majhno besedilo). */
-	color: rgba(255,255,255,0.6); padding-bottom: 0.35rem; text-transform: uppercase;
+	color: var(--muted); padding-bottom: 0.35rem; text-transform: uppercase;
 }
 .koledar__mreza td { text-align: center; padding: 1px; }
 .koledar__stevilka {
 	display: flex; align-items: center; justify-content: center;
 	width: 100%; aspect-ratio: 1; border-radius: 50%;
-	font-size: 0.78rem; color: rgba(255,255,255,0.6);
+	font-size: 0.78rem; color: var(--muted);
 }
 .koledar__dan a { text-decoration: none; display: block; }
 /* Dan s tekmo: poln krog. Doma rdeč (naša), v gosteh obrobljen. */
 .koledar__dan--doma .koledar__stevilka { background: var(--koledar-doma); color: #fff; font-weight: 700; }
-.koledar__dan--gost .koledar__stevilka { box-shadow: inset 0 0 0 1.5px var(--koledar-gost); color: #fff; font-weight: 700; }
-.koledar__dan--danes .koledar__stevilka { outline: 1.5px dashed rgba(255,255,255,0.5); outline-offset: -1px; }
+.koledar__dan--gost .koledar__stevilka { box-shadow: inset 0 0 0 1.5px var(--koledar-gost); color: var(--ink-1); font-weight: 700; }
+.koledar__dan--danes .koledar__stevilka { outline: 1.5px dashed color-mix(in srgb, var(--ink-1) 50%, transparent); outline-offset: -1px; }
 .koledar__dan a:hover .koledar__stevilka { transform: scale(1.12); }
 .koledar__dan a:focus-visible .koledar__stevilka { outline: 2px solid var(--c-red); }
-.koledar__legenda { display: flex; align-items: center; gap: 0.4rem; margin: 0.7rem 0 0; font-size: 0.7rem; color: rgba(255,255,255,0.5); }
+.koledar__legenda { display: flex; align-items: center; gap: 0.4rem; margin: 0.7rem 0 0; font-size: 0.7rem; color: var(--muted); }
 .koledar__kljuc { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
 .koledar__kljuc--doma { background: var(--koledar-doma); }
 .koledar__kljuc--gost { box-shadow: inset 0 0 0 1.5px var(--koledar-gost); }
@@ -402,7 +439,7 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
 .koledar--velik .koledar__mesec { font-size: 1.1rem; }
 .koledar--velik .koledar__stevilka { font-size: 0.95rem; }
 .koledar--velik .koledar__mreza th { font-size: 0.7rem; }
-.section--koledar { background: var(--c-ink-soft); color: var(--c-white); padding-block: clamp(2rem, 4vw, 3.5rem); }
+.section--koledar { background: var(--surface-2); color: var(--ink-2); padding-block: clamp(2rem, 4vw, 3.5rem); }
 .section--koledar .section__title { font-size: clamp(1.4rem, 2.5vw, 2rem); margin-bottom: 1.2rem; }
 @media (prefers-reduced-motion: reduce) {
 	.koledar__nav, .koledar__stevilka { transition: none; }
@@ -414,23 +451,23 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
    Harmonika je nativni <details>: deluje brez JavaScripta, je dostopna s
    tipkovnico in je klub ne more pokvariti.
    ===================================================================== */
-.section--donate { background: var(--c-ink-soft); color: var(--c-white); }
+.section--donate { background: var(--surface-2); color: var(--ink-2); }
 .donate { display: grid; gap: 2.5rem; align-items: start; }
 @media (min-width: 900px) { .donate { grid-template-columns: 1.05fr 0.95fr; gap: 3.5rem; } }
-.donate__lead { font-size: 1.1rem; color: rgba(255,255,255,0.85); max-width: 48ch; margin: 0.8rem 0 1.6rem; }
+.donate__lead { font-size: 1.1rem; color: var(--ink-2); max-width: 48ch; margin: 0.8rem 0 1.6rem; }
 .donate__figure { margin: 2rem 0 0; }
 .donate__figure img { width: 100%; height: auto; border-radius: var(--radius); display: block; }
-.donate__caption { margin-top: 0.7rem; font-size: 0.85rem; color: rgba(255,255,255,0.6); }
+.donate__caption { margin-top: 0.7rem; font-size: 0.85rem; color: var(--muted); }
 .donate__faq-title { font-size: 1.3rem; margin: 0 0 1rem; }
-.donate__q { border-top: 1px solid rgba(255,255,255,0.14); }
-.donate__q:last-of-type { border-bottom: 1px solid rgba(255,255,255,0.14); }
+.donate__q { border-top: 1px solid var(--line); }
+.donate__q:last-of-type { border-bottom: 1px solid var(--line); }
 .donate__q summary {
 	list-style: none; cursor: pointer; padding: 1.1rem 2.2rem 1.1rem 0; position: relative;
 	font-family: var(--font-head); text-transform: uppercase; font-size: 0.95rem; line-height: 1.3;
 	transition: color 0.2s var(--ease);
 }
 .donate__q summary::-webkit-details-marker { display: none; }
-.donate__q summary:hover { color: var(--c-red-text); }
+.donate__q summary:hover { color: var(--link); }
 .donate__q summary:focus-visible { outline: 2px solid var(--c-red); outline-offset: 2px; }
 /* Križec iz dveh črt: vodoravna ostane, navpična ob odprtju izgine. */
 .donate__q summary::before,
@@ -443,8 +480,8 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
    Zato desni odmik + polovica širine vodoravne (7px) - polovica svoje (1px). */
 .donate__q summary::after { width: 2px; height: 14px; right: calc(0.35rem + 6px); transform: translateY(-50%); }
 .donate__q[open] summary::after { opacity: 0; transform: translateY(-50%) rotate(90deg); }
-.donate__q[open] summary { color: var(--c-red-text); }
-.donate__q p { margin: 0 0 1.2rem; color: rgba(255,255,255,0.78); max-width: 60ch; }
+.donate__q[open] summary { color: var(--link); }
+.donate__q p { margin: 0 0 1.2rem; color: var(--ink-2); max-width: 60ch; }
 @media (prefers-reduced-motion: reduce) {
 	.donate__q summary, .donate__q summary::before, .donate__q summary::after { transition: none; }
 }
@@ -462,10 +499,10 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
 .entry-content .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-block: 1.5rem; }
 .entry-content .table-scroll:focus-visible { outline: 2px solid var(--c-red); outline-offset: 2px; }
 .entry-content table { border-collapse: collapse; width: max-content; min-width: 100%; font-size: 0.95rem; }
-.entry-content th, .entry-content td { padding: 0.55rem 0.8rem; border: 1px solid rgba(255,255,255,0.14); text-align: left; white-space: nowrap; }
-.entry-content th { font-family: var(--font-head); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.04em; color: #fff; background: rgba(255,255,255,0.05); }
+.entry-content th, .entry-content td { padding: 0.55rem 0.8rem; border: 1px solid var(--line); text-align: left; white-space: nowrap; }
+.entry-content th { font-family: var(--font-head); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.04em; color: var(--ink-1); background: var(--surface-2); }
 /* Arhivske lestvice (zgodovina) berljivejše: zebra črte + poudarek vrstice. */
-.entry-content tbody tr:nth-child(even) { background: rgba(255,255,255,0.025); }
+.entry-content tbody tr:nth-child(even) { background: var(--hover-tint); }
 .entry-content tbody tr:hover { background: rgba(226,0,26,0.07); }
 
 /* Vdelave (YouTube ...) — okvir določa mere, ne atributi iz urejevalnika. */
@@ -474,7 +511,7 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
 
 /* Dolge besede in URL-ji se lomijo namesto da raztegnejo stran. */
 .entry-content { overflow-wrap: break-word; }
-.entry-content pre { overflow-x: auto; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: var(--radius); }
+.entry-content pre { overflow-x: auto; padding: 1rem; background: var(--surface-2); border-radius: var(--radius); }
 .entry-content pre, .entry-content code { white-space: pre; }
 
 /* Naslovi: klub piše dolge naslove z vzkliki. Beseda, daljša od stolpca, ne
@@ -488,27 +525,27 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
    pri teh novicah ne more pasti čez obraze — kar je pri naših amaterskih
    fotografijah (67 % motiv čez vso širino) glavna težava.
    ===================================================================== */
-.dont-miss { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: rgba(255,255,255,0.1); border-block: 1px solid rgba(255,255,255,0.1); }
+.dont-miss { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--line); border-block: 1px solid var(--line); }
 @media (min-width: 760px) { .dont-miss { grid-template-columns: 1fr 1fr; } }
-.dont-miss__item { background: var(--c-ink); }
+.dont-miss__item { background: var(--surface); }
 .dont-miss__link {
 	display: grid; grid-template-columns: 96px 1fr; align-items: center; gap: 1.1rem;
-	padding: 1rem 1.1rem; height: 100%; color: var(--c-white); text-decoration: none;
+	padding: 1rem 1.1rem; height: 100%; color: var(--ink-1); text-decoration: none;
 	transition: background 0.25s var(--ease);
 }
-.dont-miss__link:hover { background: rgba(255,255,255,0.06); }
+.dont-miss__link:hover { background: var(--hover-tint); }
 .dont-miss__thumb { position: relative; overflow: hidden; border-radius: 2px; aspect-ratio: 4 / 3; flex: 0 0 auto; }
 .dont-miss__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s var(--ease); }
 /* Grb/logo kot naslovna slika: prikaži CELEGA (contain), ne obreži spodaj. */
-.dont-miss__thumb--logo { background: var(--c-ink-soft); }
+.dont-miss__thumb--logo { background: var(--surface-2); }
 .dont-miss__thumb--logo img { object-fit: contain; padding: 0.7rem; }
 .dont-miss__link:hover .dont-miss__thumb--logo img { transform: none; }
 .dont-miss__link:hover .dont-miss__thumb img { transform: scale(1.06); }
 .dont-miss__text { display: flex; flex-direction: column; gap: 0.35rem; min-width: 0; }
-.dont-miss__title { font-family: var(--font-head); text-transform: uppercase; font-size: 1rem; line-height: 1.2; text-wrap: balance; color: var(--c-white); }
-.dont-miss__link:hover .dont-miss__title { color: var(--c-red-text); }
+.dont-miss__title { font-family: var(--font-head); text-transform: uppercase; font-size: 1rem; line-height: 1.2; text-wrap: balance; color: var(--ink-1); }
+.dont-miss__link:hover .dont-miss__title { color: var(--link); }
 /* Datum je sekundaren, a mora ostati berljiv na temni podlagi (≥4.5:1). */
-.dont-miss__date { font-size: 0.78rem; color: rgba(255,255,255,0.62); }
+.dont-miss__date { font-size: 0.78rem; color: var(--muted); }
 @media (prefers-reduced-motion: reduce) {
 	.dont-miss__link, .dont-miss__thumb img { transition: none; }
 	.dont-miss__link:hover .dont-miss__thumb img { transform: none; }
@@ -521,14 +558,14 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
    Besedilo stoji OB sliki, ne čez njo — amaterske fotografije brez težav z
    naslovom čez obraze. Po vzoru obstoječe nkkranj.si. */
 .news-list { display: flex; flex-direction: column; gap: 1.1rem; }
-.news-row { background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); overflow: hidden; transition: transform 0.25s var(--ease), border-color 0.25s var(--ease); }
+.news-row { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: transform 0.25s var(--ease), border-color 0.25s var(--ease); }
 .news-row:hover { transform: translateY(-2px); border-color: rgba(226,0,26,0.4); }
 .news-row__link { display: grid; grid-template-columns: clamp(200px, 34%, 340px) 1fr; gap: 0; align-items: stretch; color: inherit; }
 .news-row__media { position: relative; overflow: hidden; }
 .news-row__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease); }
 /* Grb/logo kot naslovna slika kartice/vrstice: prikaži CELEGA (contain), da ni
    odrezan spodaj. Doda ga nkkranj_card_image(), ko je slika kvadratna/pokončna. */
-img.is-logo { object-fit: contain !important; background: var(--c-ink-soft); padding: 0.7rem; }
+img.is-logo { object-fit: contain !important; background: var(--surface-2); padding: 0.7rem; }
 .news-row:hover .news-row__img.is-logo, .news-card:hover .news-card__media.is-logo, .team-card:hover .team-card__media.is-logo { transform: none; }
 .news-row:hover .news-row__img { transform: scale(1.05); }
 /* Datumska značka v kotu slike (kot izvirnik). */
@@ -536,12 +573,12 @@ img.is-logo { object-fit: contain !important; background: var(--c-ink-soft); pad
 .news-row__day { font-family: var(--font-num); font-size: 1.5rem; line-height: 0.9; }
 .news-row__mon { font-family: var(--font-head); text-transform: uppercase; font-size: 0.68rem; letter-spacing: 0.06em; color: var(--c-red-text); }
 .news-row__body { padding: 1.3rem 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; justify-content: center; min-width: 0; }
-.news-row__title { margin: 0; font-family: var(--font-head); text-transform: uppercase; font-size: clamp(1.05rem, 2vw, 1.35rem); line-height: 1.15; color: #fff; }
+.news-row__title { margin: 0; font-family: var(--font-head); text-transform: uppercase; font-size: clamp(1.05rem, 2vw, 1.35rem); line-height: 1.15; color: var(--ink-1); }
 .news-row__rule { width: 42px; height: 3px; background: var(--c-red); border-radius: 2px; }
-.news-row__excerpt { margin: 0; color: var(--c-gray-200); font-size: 0.98rem; line-height: 1.6; max-width: 62ch; }
-.news-row__more { color: var(--c-gray-500); }
-.news-row__cta { font-family: var(--font-head); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--c-red-text); margin-top: 0.2rem; }
-.news-row:hover .news-row__cta { color: #fff; }
+.news-row__excerpt { margin: 0; color: var(--ink-2); font-size: 0.98rem; line-height: 1.6; max-width: 62ch; }
+.news-row__more { color: var(--muted); }
+.news-row__cta { font-family: var(--font-head); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--link); margin-top: 0.2rem; }
+.news-row:hover .news-row__cta { color: var(--ink-1); }
 @media (max-width: 640px) {
 	/* Na telefonu slika zgoraj, besedilo spodaj. */
 	.news-row__link { grid-template-columns: 1fr; }
@@ -558,7 +595,7 @@ img.is-logo { object-fit: contain !important; background: var(--c-ink-soft); pad
 }
 
 .news-mosaic { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
-.news-card { position: relative; border-radius: var(--radius); overflow: hidden; background: var(--c-ink); min-height: 240px; box-shadow: var(--shadow); transition: box-shadow 0.4s var(--ease); }
+.news-card { position: relative; border-radius: var(--radius); overflow: hidden; background: var(--surface-2); min-height: 240px; box-shadow: var(--shadow); transition: box-shadow 0.4s var(--ease); }
 .news-card:hover { box-shadow: 0 22px 48px rgba(0,0,0,0.45); }
 .news-card--feature { grid-column: span 2; grid-row: span 2; min-height: 500px; }
 .news-card__link { display: block; height: 100%; }
@@ -716,10 +753,10 @@ a.sponsor-logo { cursor: pointer; }
 .single__head, .page__head--over { position: relative; padding-block: 2rem 2.5rem; max-width: 880px; }
 /* Naslov novice/strani manjši (kot hero na domači, po zgledu FC Bayern; prej do 4rem). */
 .single__title, .page__title { font-size: clamp(1.7rem, 3.4vw, 2.7rem); line-height: 1.05; }
-.entry-date { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.1em; color: var(--c-red-text); }
+.entry-date { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.1em; color: var(--link); }
 .single__body, .page__body { max-width: 800px; padding: clamp(1.6rem, 3vw, 2.4rem) 0 clamp(2.5rem, 5vw, 4rem); }
 .page__head:not(.page__head--over) { padding-top: calc(var(--header-h) + 2.5rem); }
-.page__head:not(.page__head--over) .page__title { color: #fff; }
+.page__head:not(.page__head--over) .page__title { color: var(--ink-1); }
 .entry-content { font-size: 1.08rem; }
 .entry-content p { margin: 0 0 1.4rem; }
 .entry-content h2, .entry-content h3 { margin-top: 2rem; }
@@ -733,8 +770,8 @@ a.sponsor-logo { cursor: pointer; }
 .pagination .nav-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 .pagination a, .pagination .current {
 	display: inline-flex; min-width: 44px; height: 44px; align-items: center; justify-content: center;
-	font-family: var(--font-head); border-radius: var(--radius); background: var(--c-ink-soft); color: #fff; padding-inline: 0.8rem;
-	border: 1px solid rgba(255,255,255,0.1);
+	font-family: var(--font-head); border-radius: var(--radius); background: var(--surface); color: var(--ink-1); padding-inline: 0.8rem;
+	border: 1px solid var(--line);
 }
 .pagination .current { background: var(--c-red); color: var(--c-white); border-color: var(--c-red); }
 
@@ -922,7 +959,7 @@ a.sponsor-logo { cursor: pointer; }
    je 1ch = 10,84 px, povprečen znak v besedilu pa ~9 px — zato je 68ch = 737 px
    (torej ŠIRŠE od 720 px vsebnika) in omejitev ni naredila ničesar. Izmerjeno.
    Za ~70 pravih znakov je treba 58ch. */
-.entry-content { color: #cfd2da; font-size: 1.075rem; }
+.entry-content { color: var(--ink-2); font-size: 1.075rem; }
 .entry-content > p,
 .entry-content > ul,
 .entry-content > ol,
@@ -933,7 +970,7 @@ a.sponsor-logo { cursor: pointer; }
 }
 .entry-content > p { margin-block: 0 1.5rem; }
 /* Vodilni (prvi) odstavek novice je večji in svetlejši — uvod, ne stena. */
-.single__body .entry-content > p:first-of-type { font-size: 1.22rem; line-height: 1.7; color: #eceef2; margin-bottom: 1.7rem; }
+.single__body .entry-content > p:first-of-type { font-size: 1.22rem; line-height: 1.7; color: var(--ink-1); margin-bottom: 1.7rem; }
 /* Lepa začetnica na prvi črki prvega odstavka (uredniški pridih). */
 .single__body .entry-content > p:first-of-type::first-letter {
 	float: left; font-family: var(--font-display); font-size: 3.6rem; line-height: 0.8;
@@ -980,21 +1017,21 @@ a.sponsor-logo { cursor: pointer; }
 	}
 	.single__body .entry-content > p:first-of-type::first-letter { font-size: 3rem; }
 }
-.entry-content a { color: var(--c-red-text); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-.entry-content a:hover { color: #fff; }
-.entry-content strong { color: #fff; }
+.entry-content a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.entry-content a:hover { color: var(--ink-1); }
+.entry-content strong { color: var(--ink-1); }
 /* Vbrizgane fotografije v vsebinskih straneh — razbijejo steno besedila. */
 .page-figure { margin: 2.4rem 0; }
 .page-figure img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow-lg); }
-.entry-content blockquote { position: relative; background: rgba(226,0,26,0.06); border: 1px solid rgba(226,0,26,0.18); border-radius: var(--radius); padding: 1.6rem 1.6rem 1.6rem 3.4rem; margin-inline: 0; color: #fff; font-size: 1.12rem; }
+.entry-content blockquote { position: relative; background: rgba(226,0,26,0.06); border: 1px solid rgba(226,0,26,0.18); border-radius: var(--radius); padding: 1.6rem 1.6rem 1.6rem 3.4rem; margin-inline: 0; color: var(--ink-1); font-size: 1.12rem; }
 .entry-content blockquote::before { content: "\201C"; position: absolute; left: 0.9rem; top: 0.3rem; font-family: var(--font-head); font-size: 3rem; line-height: 1; color: var(--c-red); }
 .entry-content blockquote p:last-child { margin-bottom: 0; }
-.muted { color: var(--c-gray-500); }
+.muted { color: var(--muted); }
 
 /* Prose — berljiva vsebinska stran */
 .prose { max-width: 72ch; }
-.prose > .lead, .entry-content .lead { font-size: clamp(1.2rem, 2.2vw, 1.45rem); line-height: 1.5; color: #fff; margin-bottom: 1.8rem; text-wrap: pretty; }
-.prose h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin: 2.4rem 0 0.8rem; color: #fff; }
+.prose > .lead, .entry-content .lead { font-size: clamp(1.2rem, 2.2vw, 1.45rem); line-height: 1.5; color: var(--ink-1); margin-bottom: 1.8rem; text-wrap: pretty; }
+.prose h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin: 2.4rem 0 0.8rem; color: var(--ink-1); }
 .prose h2::after { content: ""; display: block; width: 48px; height: 4px; background: var(--c-red); margin-top: 0.6rem; }
 .prose h3 { font-size: 1.25rem; margin: 1.8rem 0 0.6rem; }
 .prose p { margin: 0 0 1.2rem; text-wrap: pretty; }
@@ -1003,7 +1040,7 @@ a.sponsor-logo { cursor: pointer; }
 .prose ul li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 7px; height: 7px; background: var(--c-red); border-radius: 1px; transform: rotate(45deg); }
 .prose ol { counter-reset: nkk; }
 .prose ol li { counter-increment: nkk; position: relative; padding-left: 2rem; margin-bottom: 0.6rem; }
-.prose ol li::before { content: counter(nkk); position: absolute; left: 0; top: 0; font-family: var(--font-head); color: var(--c-red-text); font-weight: 700; }
+.prose ol li::before { content: counter(nkk); position: absolute; left: 0; top: 0; font-family: var(--font-head); color: var(--link); font-weight: 700; }
 .prose img { border-radius: var(--radius); }
 
 /* Slike v člankih — urejeno, brez napihovanja (nevtralizira postrgani float/
@@ -1063,10 +1100,10 @@ a.sponsor-logo { cursor: pointer; }
 .page-lead__text { color: var(--c-gray-500); max-width: 60ch; }
 
 /* Roster igralcev */
-.team-coach { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1.4rem; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.04em; color: #fff; font-size: 1.05rem; }
-.team-coach__label { font-size: 0.7rem; letter-spacing: 0.14em; color: var(--c-red-text); border: 1px solid rgba(226,0,26,0.4); border-radius: 999px; padding: 0.25rem 0.7rem; }
+.team-coach { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1.4rem; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-1); font-size: 1.05rem; }
+.team-coach__label { font-size: 0.7rem; letter-spacing: 0.14em; color: var(--link); border: 1px solid rgba(226,0,26,0.4); border-radius: 999px; padding: 0.25rem 0.7rem; }
 .roster { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
-.player-card { background: var(--c-ink-soft); border-radius: var(--radius); overflow: hidden; border: 1px solid rgba(255,255,255,0.06); transition: transform 0.3s var(--ease); }
+.player-card { background: var(--surface); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); transition: transform 0.3s var(--ease); }
 .player-card:hover { transform: translateY(-4px); }
 .player-card__media { position: relative; aspect-ratio: 3 / 4; background-size: cover; background-position: center top; }
 .player-card__num { position: absolute; right: 0.6rem; bottom: 0.4rem; font-family: var(--font-head); font-size: 2.4rem; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,0.6); line-height: 1; }
@@ -1076,91 +1113,91 @@ a.sponsor-logo { cursor: pointer; }
 .player-card--mono .player-card__media::after { content: ""; position: absolute; right: -18%; bottom: -22%; width: 75%; height: 75%; border-radius: 50%; border: 3px solid rgba(255,255,255,0.10); }
 .player-card__mono { position: relative; z-index: 1; font-family: var(--font-head); font-weight: 800; font-size: clamp(2.2rem, 5.4vw, 3.4rem); letter-spacing: 0.04em; color: #fff; line-height: 1; text-shadow: 0 4px 18px rgba(0,0,0,0.28); }
 .player-card__info { padding: 0.8rem 0.9rem; }
-.player-card__name { display: block; font-family: var(--font-head); text-transform: uppercase; color: #fff; font-size: 1.05rem; }
-.player-card__pos { font-size: 0.8rem; color: var(--c-red-text); text-transform: uppercase; letter-spacing: 0.08em; }
+.player-card__name { display: block; font-family: var(--font-head); text-transform: uppercase; color: var(--ink-1); font-size: 1.05rem; }
+.player-card__pos { font-size: 0.8rem; color: var(--link); text-transform: uppercase; letter-spacing: 0.08em; }
 
 /* Tekme / semaforji */
 .fixtures { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-.fixture { display: flex; flex-direction: column; gap: 0.7rem; padding: 1.4rem 1.3rem; background: var(--c-ink-soft); border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.09); transition: transform 0.25s var(--ease), background 0.25s var(--ease), border-color 0.25s var(--ease); }
-.fixture:hover { transform: translateY(-3px); background: #1c1f29; border-color: rgba(226,0,26,0.4); }
-.fixture__comp { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.72rem; color: var(--c-red-text); }
-.fixture__teams { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; font-family: var(--font-head); text-transform: uppercase; color: #fff; }
+.fixture { display: flex; flex-direction: column; gap: 0.7rem; padding: 1.4rem 1.3rem; background: var(--surface); border-radius: var(--radius); border: 1px solid var(--line); transition: transform 0.25s var(--ease), background 0.25s var(--ease), border-color 0.25s var(--ease); }
+.fixture:hover { transform: translateY(-3px); background: var(--hover-tint); border-color: rgba(226,0,26,0.4); }
+.fixture__comp { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.72rem; color: var(--link); }
+.fixture__teams { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; font-family: var(--font-head); text-transform: uppercase; color: var(--ink-1); }
 .fixture__team { flex: 1; display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
 .fixture__ime { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .fixture__team .fixture-card__crest { width: 30px; height: 30px; object-fit: contain; flex: 0 0 auto; }
 .fixture__teams .fixture__team:last-child { justify-content: flex-end; text-align: right; }
 .fixture__score { font-size: 1.5rem; color: var(--c-red); font-family: var(--font-num); }
-.fixture__when { font-size: 0.85rem; color: var(--c-gray-500); }
+.fixture__when { font-size: 0.85rem; color: var(--muted); }
 
 /* Lestvica lige (Merkur GNL, vir MNZ Gorenjska) */
-.lestvica { background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.09); border-radius: var(--radius); overflow: hidden; }
-.lestvica__glava { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: 1.1rem 1.3rem 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
-.lestvica__naslov { margin: 0; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.04em; font-size: 1.05rem; color: #fff; }
-.lestvica__sezona { font-family: var(--font-num); font-size: 1.1rem; color: var(--c-red-text); }
+.lestvica { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.lestvica__glava { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: 1.1rem 1.3rem 0.9rem; border-bottom: 1px solid var(--line); }
+.lestvica__naslov { margin: 0; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.04em; font-size: 1.05rem; color: var(--ink-1); }
+.lestvica__sezona { font-family: var(--font-num); font-size: 1.1rem; color: var(--link); }
 .lestvica .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-.lestvica__tabela { width: 100%; border-collapse: collapse; font-size: 0.92rem; color: var(--c-gray-200); }
+.lestvica__tabela { width: 100%; border-collapse: collapse; font-size: 0.92rem; color: var(--ink-2); }
 .lestvica__tabela th, .lestvica__tabela td { padding: 0.6rem 0.5rem; text-align: center; white-space: nowrap; }
-.lestvica__tabela thead th { font-family: var(--font-head); text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--c-gray-500); font-weight: 600; }
-.lestvica__mesto { width: 2.2rem; font-family: var(--font-num); font-size: 1.05rem; color: var(--c-gray-500); }
+.lestvica__tabela thead th { font-family: var(--font-head); text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; }
+.lestvica__mesto { width: 2.2rem; font-family: var(--font-num); font-size: 1.05rem; color: var(--muted); }
 .lestvica__klub { text-align: left !important; display: flex; align-items: center; gap: 0.55rem; padding-left: 0.9rem !important; }
 .lestvica__klub .fixture-card__crest { width: 24px; height: 24px; object-fit: contain; flex: 0 0 auto; }
-.lestvica__ime { font-family: var(--font-head); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.02em; color: #fff; }
+.lestvica__ime { font-family: var(--font-head); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.02em; color: var(--ink-1); }
 .lestvica__goli { font-family: var(--font-num); }
-.lestvica__tocke { font-family: var(--font-num); font-size: 1.15rem; color: #fff; padding-right: 0.9rem !important; }
-.lestvica__tabela tbody tr { border-top: 1px solid rgba(255,255,255,0.05); }
-.lestvica__tabela tbody tr:hover { background: rgba(255,255,255,0.03); }
+.lestvica__tocke { font-family: var(--font-num); font-size: 1.15rem; color: var(--ink-1); padding-right: 0.9rem !important; }
+.lestvica__tabela tbody tr { border-top: 1px solid var(--line-2); }
+.lestvica__tabela tbody tr:hover { background: var(--hover-tint); }
 /* Naša vrstica: rdeč pas ob levem robu + poudarek, kot na fcbayern.com. */
 .lestvica__vrstica--nas { background: rgba(226,0,26,0.12); box-shadow: inset 3px 0 0 var(--c-red); }
 .lestvica__vrstica--nas .lestvica__ime,
-.lestvica__vrstica--nas .lestvica__mesto { color: #fff; }
-.lestvica__vir { margin: 0; padding: 0.7rem 1.3rem 1rem; font-size: 0.78rem; color: var(--c-gray-500); }
-.lestvica__vir a { color: var(--c-gray-500); text-decoration: underline; }
+.lestvica__vrstica--nas .lestvica__mesto { color: var(--ink-1); }
+.lestvica__vir { margin: 0; padding: 0.7rem 1.3rem 1rem; font-size: 0.78rem; color: var(--muted); }
+.lestvica__vir a { color: var(--muted); text-decoration: underline; }
 
 /* Mlajše selekcije: klik-kartice do rezultatov na MNZ Gorenjska (zunanja stran). */
-.mlajse-uvod { max-width: 60ch; margin: -0.4rem 0 1.4rem; color: var(--c-gray-200); line-height: 1.6; }
+.mlajse-uvod { max-width: 60ch; margin: -0.4rem 0 1.4rem; color: var(--ink-2); line-height: 1.6; }
 .mlajse-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
 .mlajse-card__ext { font-family: var(--font-num); }
-.mlajse-card { position: relative; display: flex; flex-direction: column; gap: 0.5rem; padding: 1.4rem 1.4rem 1.2rem; min-height: 150px; background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.09); border-radius: var(--radius-md); overflow: hidden; color: inherit; box-shadow: 0 1px 2px rgba(0,0,0,0.25); transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.35s var(--ease); }
+.mlajse-card { position: relative; display: flex; flex-direction: column; gap: 0.5rem; padding: 1.4rem 1.4rem 1.2rem; min-height: 150px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); overflow: hidden; color: inherit; box-shadow: 0 1px 2px rgba(0,0,0,0.25); transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.35s var(--ease); }
 /* Spodnja poudarna linija (namesto stranske črtice — čistejši, ne "side-stripe"). */
 .mlajse-card::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--c-red); transform: scaleX(0); transform-origin: left; transition: transform 0.35s var(--ease); }
 .mlajse-card:hover { transform: translateY(-4px); border-color: rgba(226,0,26,0.45); box-shadow: 0 18px 38px rgba(0,0,0,0.42); }
 .mlajse-card:hover::after { transform: scaleX(1); }
-.mlajse-card__ime { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.4rem); line-height: 0.95; color: #fff; letter-spacing: 0.01em; }
-.mlajse-card__cta { font-family: var(--font-head); text-transform: uppercase; font-size: 0.78rem; letter-spacing: 0.05em; color: var(--c-red-text); margin-top: auto; }
-.mlajse-card:hover .mlajse-card__cta { color: #fff; }
+.mlajse-card__ime { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.4rem); line-height: 0.95; color: var(--ink-1); letter-spacing: 0.01em; }
+.mlajse-card__cta { font-family: var(--font-head); text-transform: uppercase; font-size: 0.78rem; letter-spacing: 0.05em; color: var(--link); margin-top: auto; }
+.mlajse-card:hover .mlajse-card__cta { color: var(--ink-1); }
 .mlajse-card__ext { transition: transform 0.25s var(--ease); }
 .mlajse-card:hover .mlajse-card__ext { transform: translate(2px, -2px); }
 @media (prefers-reduced-motion: reduce) { .mlajse-card, .mlajse-card::after, .mlajse-card__ext { transition: none; } .mlajse-card:hover { transform: none; } .mlajse-card:hover::after { transform: scaleX(1); } .mlajse-card:hover .mlajse-card__ext { transform: none; } }
 
 /* Podstran mlajših selekcij (/tekme/mlajse-selekcije/) — večje kartice s starostjo. */
 .page-lead--mlajse { background-position: center 42%; }
-.drobtine { display: flex; align-items: center; gap: 0.55rem; font-family: var(--font-head); text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--c-gray-200); margin-bottom: 0.9rem; }
-.drobtine a { color: var(--c-gray-200); transition: color 0.2s var(--ease); }
-.drobtine a:hover { color: #fff; }
-.drobtine span[aria-hidden] { color: rgba(255,255,255,0.35); }
-.drobtine [aria-current] { color: var(--c-red-text); }
+.drobtine { display: flex; align-items: center; gap: 0.55rem; font-family: var(--font-head); text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 0.9rem; }
+.drobtine a { color: var(--ink-2); transition: color 0.2s var(--ease); }
+.drobtine a:hover { color: var(--ink-1); }
+.drobtine span[aria-hidden] { color: var(--muted); }
+.drobtine [aria-current] { color: var(--link); }
 .mlajse-grid--velik { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.1rem; }
 .mlajse-grid--velik .mlajse-card { min-height: 190px; padding: 1.6rem; gap: 0.35rem; }
 .mlajse-grid--velik .mlajse-card__ime { font-family: var(--font-num); font-weight: 600; font-size: clamp(2.8rem, 6vw, 3.6rem); letter-spacing: 0; }
-.mlajse-card__opis { font-family: var(--font-head); text-transform: uppercase; font-size: 0.74rem; letter-spacing: 0.08em; color: var(--c-gray-200); }
-.mlajse-vir-opomba { margin-top: 1.4rem; font-size: 0.86rem; color: var(--c-gray-500); max-width: 60ch; }
+.mlajse-card__opis { font-family: var(--font-head); text-transform: uppercase; font-size: 0.74rem; letter-spacing: 0.08em; color: var(--ink-2); }
+.mlajse-vir-opomba { margin-top: 1.4rem; font-size: 0.86rem; color: var(--muted); max-width: 60ch; }
 
 /* Kompaktni CTA pas na /tekme/ → podstran. */
-.mlajse-cta { position: relative; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.2rem; padding: clamp(1.4rem, 3vw, 2rem); background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.09); border-radius: var(--radius-lg); overflow: hidden; color: inherit; transition: transform 0.25s var(--ease), border-color 0.25s var(--ease); }
+.mlajse-cta { position: relative; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.2rem; padding: clamp(1.4rem, 3vw, 2rem); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; color: inherit; transition: transform 0.25s var(--ease), border-color 0.25s var(--ease); }
 .mlajse-cta::after { content: ""; position: absolute; inset: 0; background: radial-gradient(90% 140% at 100% 0%, rgba(226,0,26,0.14), transparent 55%); pointer-events: none; }
 .mlajse-cta:hover { transform: translateY(-2px); border-color: rgba(226,0,26,0.45); }
 .mlajse-cta__glava { position: relative; display: flex; flex-direction: column; gap: 0.25rem; }
-.mlajse-cta__naslov { font-family: var(--font-display); font-size: clamp(1.6rem, 4vw, 2.2rem); color: #fff; line-height: 1; }
-.mlajse-cta__pod { color: var(--c-gray-200); font-size: 0.92rem; }
-.mlajse-cta__gumb { position: relative; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.9rem; color: var(--c-red-text); white-space: nowrap; }
-.mlajse-cta:hover .mlajse-cta__gumb { color: #fff; }
+.mlajse-cta__naslov { font-family: var(--font-display); font-size: clamp(1.6rem, 4vw, 2.2rem); color: var(--ink-1); line-height: 1; }
+.mlajse-cta__pod { color: var(--ink-2); font-size: 0.92rem; }
+.mlajse-cta__gumb { position: relative; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.9rem; color: var(--link); white-space: nowrap; }
+.mlajse-cta:hover .mlajse-cta__gumb { color: var(--ink-1); }
 .mlajse-cta__gumb span { display: inline-block; transition: transform 0.25s var(--ease); }
 .mlajse-cta:hover .mlajse-cta__gumb span { transform: translateX(4px); }
 
 /* Vpisni blok na dnu podstrani. */
 .mlajse-vpis { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; }
 .mlajse-vpis__naslov { margin: 0 0 0.4rem; font-size: clamp(1.5rem, 3.5vw, 2rem); }
-.mlajse-vpis__besedilo p { margin: 0; color: var(--c-gray-200); max-width: 46ch; }
+.mlajse-vpis__besedilo p { margin: 0; color: var(--ink-2); max-width: 46ch; }
 @media (prefers-reduced-motion: reduce) { .mlajse-cta, .mlajse-cta__gumb span { transition: none; } .mlajse-cta:hover { transform: none; } .mlajse-cta:hover .mlajse-cta__gumb span { transform: none; } }
 /* MOBILNIK: lestvica brez drsenja levo-desno. Statistične stolpce (T Z N P Goli)
    skrijemo, pustimo #, Klub in Točke — bistvo razvrstitve. Ime kluba se prelomi. */
@@ -1174,7 +1211,7 @@ a.sponsor-logo { cursor: pointer; }
 	.lestvica__tocke { padding-right: 0.6rem !important; }
 	.lestvica__glava { padding-inline: 0.9rem; }
 }
-.lestvica__vir a:hover { color: var(--c-red-text); }
+.lestvica__vir a:hover { color: var(--link); }
 /* Strnjena različica (noga / stranski stolpec): brez statistike, le mesto-klub-točke. */
 .lestvica--strnjeno .lestvica__ime { font-size: 0.8rem; }
 
@@ -1230,16 +1267,16 @@ a.sponsor-logo { cursor: pointer; }
 .nkkranj-form { display: grid; gap: 1.1rem; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
 .form-field { display: grid; gap: 0.4rem; }
-.form-label { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.74rem; color: var(--c-gray-200); }
+.form-label { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.74rem; color: var(--ink-2); }
 .nkkranj-form input,
 .nkkranj-form select,
 .nkkranj-form textarea {
 	width: 100%;
 	font-family: var(--font-body);
 	font-size: 1rem;
-	color: #fff;
-	background: var(--c-ink-soft);
-	border: 1px solid rgba(255,255,255,0.12);
+	color: var(--ink-1);
+	background: var(--surface);
+	border: 1px solid var(--line);
 	border-radius: var(--radius);
 	padding: 0.7rem 0.85rem;
 	transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
@@ -1252,37 +1289,37 @@ a.sponsor-logo { cursor: pointer; }
 	border-color: var(--c-red);
 	box-shadow: 0 0 0 3px rgba(226,0,26,0.18);
 }
-.nkkranj-form select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--c-gray-200) 50%), linear-gradient(135deg, var(--c-gray-200) 50%, transparent 50%); background-position: calc(100% - 18px) 1.15rem, calc(100% - 13px) 1.15rem; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 2.5rem; }
+.nkkranj-form select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%); background-position: calc(100% - 18px) 1.15rem, calc(100% - 13px) 1.15rem; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 2.5rem; }
 .nkkranj-form button { justify-self: start; margin-top: 0.3rem; cursor: pointer; border: none; }
-.form-fineprint { margin: 0; font-size: 0.82rem; color: var(--c-gray-500); }
+.form-fineprint { margin: 0; font-size: 0.82rem; color: var(--muted); }
 /* GDPR privolitev: checkbox in besedilo poravnana, tapljiv cilj, berljivo. */
-.form-consent { display: flex; align-items: flex-start; gap: 0.6rem; margin: 0.2rem 0 0.4rem; font-size: 0.88rem; line-height: 1.5; color: var(--c-gray-200); cursor: pointer; }
+.form-consent { display: flex; align-items: flex-start; gap: 0.6rem; margin: 0.2rem 0 0.4rem; font-size: 0.88rem; line-height: 1.5; color: var(--ink-2); cursor: pointer; }
 .form-consent input[type="checkbox"] { flex: 0 0 auto; width: 1.15rem; height: 1.15rem; margin-top: 0.15rem; accent-color: var(--c-red); cursor: pointer; }
-.form-consent a { color: var(--c-red-text); text-decoration: underline; }
-.form-consent a:hover { color: #fff; }
+.form-consent a { color: var(--link); text-decoration: underline; }
+.form-consent a:hover { color: var(--ink-1); }
 
 /* Pogosta vprašanja (nogometna šola) — zložljivi odgovori, brez JS. */
 .sola-faq { margin-block: 3rem 1rem; }
 .sola-faq h2 { margin-bottom: 1.2rem; }
 .sola-faq__seznam { display: flex; flex-direction: column; gap: 0.6rem; }
-.sola-faq__vprasanje { border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); background: var(--c-ink-soft); overflow: hidden; }
-.sola-faq__vprasanje summary { cursor: pointer; padding: 1rem 1.2rem; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.02em; font-size: 1rem; color: #fff; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.sola-faq__vprasanje { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+.sola-faq__vprasanje summary { cursor: pointer; padding: 1rem 1.2rem; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.02em; font-size: 1rem; color: var(--ink-1); list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
 .sola-faq__vprasanje summary::-webkit-details-marker { display: none; }
 .sola-faq__vprasanje summary::after { content: "+"; font-family: var(--font-num); font-size: 1.5rem; color: var(--c-red); line-height: 1; flex: 0 0 auto; transition: transform 0.25s var(--ease); }
 .sola-faq__vprasanje[open] summary::after { transform: rotate(45deg); }
-.sola-faq__vprasanje p { margin: 0; padding: 0 1.2rem 1.1rem; color: var(--c-gray-200); line-height: 1.65; max-width: 65ch; }
+.sola-faq__vprasanje p { margin: 0; padding: 0 1.2rem 1.1rem; color: var(--ink-2); line-height: 1.65; max-width: 65ch; }
 @media (prefers-reduced-motion: reduce) { .sola-faq__vprasanje summary::after { transition: none; } }
 /* Klic je enakovredna pot do vpisa, ne drobni tisk — zato vidnejši od
    fineprinta in s tapljivo številko (44px cilj na telefonu). */
-.form-poklici { margin: 0.9rem 0 0.6rem; font-size: 0.95rem; color: var(--c-gray-500); }
+.form-poklici { margin: 0.9rem 0 0.6rem; font-size: 0.95rem; color: var(--muted); }
 .form-poklici a {
-	font-family: var(--font-head); font-size: 1.1rem; color: var(--c-red-text);
+	font-family: var(--font-head); font-size: 1.1rem; color: var(--link);
 	text-decoration: none; padding: 0.3rem 0; display: inline-block; min-height: 44px;
 	line-height: 38px;
 }
 .form-poklici a:hover { text-decoration: underline; }
 /* Splošna številka je drugotna: na strani vpisa je 041 tista, ki jo starš rabi. */
-.form-poklici__drugi { font-size: 0.95rem; color: var(--c-gray-500); }
+.form-poklici__drugi { font-size: 0.95rem; color: var(--muted); }
 /* Honeypot – skrito pred ljudmi, dostopno botom */
 .nkkranj-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form-notice { padding: 0.9rem 1.1rem; border-radius: var(--radius); margin-bottom: 1.4rem; font-size: 0.95rem; border: 1px solid transparent; }
@@ -1312,15 +1349,15 @@ a.sponsor-logo { cursor: pointer; }
 @media (prefers-reduced-motion: reduce) { .cookie-banner { transition: none; } }
 
 /* ---------- Vgrajen zemljevid (kontakt) ---------- */
-.map-embed { margin: 0 0 1rem; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); box-shadow: var(--shadow); }
+.map-embed { margin: 0 0 1rem; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); }
 .map-embed iframe { display: block; width: 100%; height: 380px; border: 0; filter: saturate(0.9); }
 
 /* ---------- Prazna stanja (vsebina še ni vnesena) ---------- */
-.empty-state { text-align: center; max-width: 540px; margin: 0 auto; padding: 3rem 1.6rem; background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; }
+.empty-state { text-align: center; max-width: 540px; margin: 0 auto; padding: 3rem 1.6rem; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
 .empty-state__icon { width: 56px; height: 56px; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(226,0,26,0.12); color: var(--c-red); }
 .empty-state__icon svg { width: 28px; height: 28px; }
-.empty-state__title { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.05em; color: #fff; font-size: 1.15rem; margin: 0 0 0.4rem; }
-.empty-state p { margin: 0; color: var(--c-gray-500); }
+.empty-state__title { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-1); font-size: 1.15rem; margin: 0 0 0.4rem; }
+.empty-state p { margin: 0; color: var(--muted); }
 
 /* ---------- Video facade (Vaja dela mojstra) ---------- */
 .video-lite { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; margin: 0; padding: 0; border: 0; border-radius: var(--radius); overflow: hidden; cursor: pointer; background: #000; box-shadow: 0 12px 30px rgba(0,0,0,0.35); }
@@ -1359,31 +1396,31 @@ a.sponsor-logo { cursor: pointer; }
 /* ---------- Posnetki vaj (Vaja dela mojstra) ---------- */
 .vaje-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; }
 .vaje-grid--preview { grid-template-columns: repeat(4, 1fr); }
-.vaja-clip { margin: 0; background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius); overflow: hidden; }
+.vaja-clip { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
 .vaja-clip__video { display: block; width: 100%; aspect-ratio: 9 / 16; max-height: 460px; object-fit: cover; background: #000; }
-.vaja-clip__title { padding: 0.7rem 0.9rem; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.02em; font-size: 0.92rem; color: #fff; }
+.vaja-clip__title { padding: 0.7rem 0.9rem; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.02em; font-size: 0.92rem; color: var(--ink-1); }
 @media (max-width: 980px) { .vaje-grid--preview { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px) { .vaje-grid, .vaje-grid--preview { grid-template-columns: 1fr; } }
 
 /* ---------- O klubu: osebna izkaznica + navigacija ---------- */
-.club-id { display: grid; grid-template-columns: auto 1fr; gap: clamp(1.2rem, 4vw, 2.6rem); align-items: center; margin: 2.4rem 0; padding: clamp(1.4rem, 4vw, 2.2rem); background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); }
+.club-id { display: grid; grid-template-columns: auto 1fr; gap: clamp(1.2rem, 4vw, 2.6rem); align-items: center; margin: 2.4rem 0; padding: clamp(1.4rem, 4vw, 2.2rem); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
 .club-id__badge { display: flex; flex-direction: column; align-items: center; justify-content: center; width: clamp(110px, 28vw, 150px); aspect-ratio: 1; border-radius: 50%; background: linear-gradient(150deg, var(--c-red), var(--c-red-dark)); box-shadow: 0 10px 30px rgba(226,0,26,0.25); }
 .club-id__year { font-family: var(--font-head); font-weight: 800; font-size: clamp(2rem, 6vw, 2.8rem); color: #fff; line-height: 1; }
 .club-id__label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.85); margin-top: 0.3rem; }
 .club-id__facts { margin: 0; display: grid; gap: 0; }
-.club-id__row { display: grid; grid-template-columns: minmax(120px, 0.5fr) 1fr; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.club-id__row { display: grid; grid-template-columns: minmax(120px, 0.5fr) 1fr; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--line); }
 .club-id__row:last-child { border-bottom: 0; }
-.club-id__row dt { margin: 0; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--c-red-text); font-weight: 700; align-self: center; }
-.club-id__row dd { margin: 0; color: #fff; font-size: 1.02rem; }
+.club-id__row dt { margin: 0; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--link); font-weight: 700; align-self: center; }
+.club-id__row dd { margin: 0; color: var(--ink-1); font-size: 1.02rem; }
 @media (max-width: 560px) { .club-id { grid-template-columns: 1fr; justify-items: center; text-align: center; } .club-id__row { grid-template-columns: 1fr; gap: 0.1rem; text-align: left; } }
 
 .subpage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin: 2.4rem 0 1rem; }
-.subpage-card { position: relative; display: flex; flex-direction: column; gap: 0.3rem; padding: 1.3rem 1.4rem; background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); text-decoration: none; transition: transform 0.3s var(--ease), border-color 0.3s var(--ease); overflow: hidden; }
+.subpage-card { position: relative; display: flex; flex-direction: column; gap: 0.3rem; padding: 1.3rem 1.4rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; transition: transform 0.3s var(--ease), border-color 0.3s var(--ease); overflow: hidden; }
 .subpage-card::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--c-red); transform: scaleX(0); transform-origin: left; transition: transform 0.3s var(--ease); }
 .subpage-card:hover { transform: translateY(-3px); border-color: rgba(226,0,26,0.4); }
 .subpage-card:hover::before { transform: scaleX(1); }
-.subpage-card__title { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.02em; color: #fff; font-size: 1.1rem; }
-.subpage-card__desc { color: var(--c-gray-500); font-size: 0.9rem; }
+.subpage-card__title { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.02em; color: var(--ink-1); font-size: 1.1rem; }
+.subpage-card__desc { color: var(--muted); font-size: 0.9rem; }
 .subpage-card__arrow { position: absolute; right: 1.2rem; top: 1.2rem; color: var(--c-red); font-size: 1.2rem; opacity: 0; transition: opacity 0.3s var(--ease), transform 0.3s var(--ease); }
 .subpage-card:hover .subpage-card__arrow { opacity: 1; transform: translateX(3px); }
 
@@ -1402,10 +1439,10 @@ a.sponsor-logo { cursor: pointer; }
 
 /* ---------- Prenosi dokumentov (PDF) ---------- */
 .doc-downloads { display: grid; gap: 0.7rem; margin: 1.5rem 0 2.4rem; }
-.doc-download { display: flex; align-items: center; gap: 1rem; padding: 0.95rem 1.2rem; background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); text-decoration: none; transition: transform 0.25s var(--ease), border-color 0.25s var(--ease); }
+.doc-download { display: flex; align-items: center; gap: 1rem; padding: 0.95rem 1.2rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; transition: transform 0.25s var(--ease), border-color 0.25s var(--ease); }
 .doc-download:hover { transform: translateY(-2px); border-color: rgba(226,0,26,0.4); }
 .doc-download__icon { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 8px; background: var(--c-red); color: #fff; font-family: var(--font-head); font-size: 0.72rem; letter-spacing: 0.05em; }
-.doc-download__title { flex: 1; color: #fff; font-weight: 600; }
+.doc-download__title { flex: 1; color: var(--ink-1); font-weight: 600; }
 .doc-download__arrow { color: var(--c-red); font-size: 1.3rem; transition: transform 0.25s var(--ease); }
 .doc-download:hover .doc-download__arrow { transform: translateY(3px); }
 
@@ -1413,19 +1450,19 @@ a.sponsor-logo { cursor: pointer; }
 .history-timeline { position: relative; padding-left: 2.4rem; }
 .history-timeline::before { content: ""; position: absolute; left: 6px; top: 0.6rem; bottom: 0.6rem; width: 2px; background: linear-gradient(to bottom, var(--c-red), rgba(226,0,26,0.15)); }
 .history-timeline h2, .history-timeline h3 { position: relative; margin-top: 2.6rem; }
-.history-timeline h2::before, .history-timeline h3::before { content: ""; position: absolute; left: calc(-2.4rem + 1px); top: 0.35em; width: 13px; height: 13px; border-radius: 50%; background: var(--c-red); box-shadow: 0 0 0 4px var(--c-ink), 0 0 0 6px rgba(226,0,26,0.25); }
+.history-timeline h2::before, .history-timeline h3::before { content: ""; position: absolute; left: calc(-2.4rem + 1px); top: 0.35em; width: 13px; height: 13px; border-radius: 50%; background: var(--c-red); box-shadow: 0 0 0 4px var(--surface), 0 0 0 6px rgba(226,0,26,0.25); }
 .history-timeline > *:first-child { margin-top: 0; }
 @media (max-width: 560px) { .history-timeline { padding-left: 1.8rem; } .history-timeline h2::before, .history-timeline h3::before { left: calc(-1.8rem + 1px); } }
 
 /* ---------- Razširljivo branje (npr. statut) ---------- */
-.readmore { margin: 1.5rem 0; border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); overflow: hidden; background: var(--c-ink-soft); }
-.readmore__toggle { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 0.7rem; padding: 1.1rem 1.4rem; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.03em; color: #fff; font-size: 1.05rem; transition: background 0.2s var(--ease); }
+.readmore { margin: 1.5rem 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+.readmore__toggle { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 0.7rem; padding: 1.1rem 1.4rem; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.03em; color: var(--ink-1); font-size: 1.05rem; transition: background 0.2s var(--ease); }
 .readmore__toggle::-webkit-details-marker { display: none; }
 .readmore__toggle::after { content: "\25BE"; margin-left: auto; color: var(--c-red); transition: transform 0.3s var(--ease); }
 .readmore[open] .readmore__toggle::after { transform: rotate(180deg); }
-.readmore__toggle:hover { background: rgba(255,255,255,0.04); }
+.readmore__toggle:hover { background: var(--hover-tint); }
 .readmore__icon { font-size: 1.2rem; }
-.readmore__content { padding: 0.4rem 1.4rem 1.6rem; border-top: 1px solid rgba(255,255,255,0.08); max-height: 70vh; overflow-y: auto; }
+.readmore__content { padding: 0.4rem 1.4rem 1.6rem; border-top: 1px solid var(--line); max-height: 70vh; overflow-y: auto; }
 .readmore__content h3 { margin-top: 1.6rem; }
 
 /* ---------- Zgodovina kluba: bogatejši videz (grb v ozadju, žareča os) ----------
@@ -1450,18 +1487,18 @@ a.sponsor-logo { cursor: pointer; }
 .page-id-55 .history-timeline::before { box-shadow: 0 0 18px rgba(226,0,26,0.45); }
 .page-id-55 .history-timeline h2::before,
 .page-id-55 .history-timeline h3::before {
-	box-shadow: 0 0 0 4px var(--c-ink), 0 0 0 6px rgba(226,0,26,0.3), 0 0 16px rgba(226,0,26,0.6);
+	box-shadow: 0 0 0 4px var(--surface), 0 0 0 6px rgba(226,0,26,0.3), 0 0 16px rgba(226,0,26,0.6);
 }
 /* uvodni podnaslov ("Z VAMI ŽE OD LETA 1973") kot žig kluba */
 .page-id-55 .history-timeline > h2:first-of-type,
-.page-id-55 .history-timeline > h3:first-of-type { color: #fff; }
+.page-id-55 .history-timeline > h3:first-of-type { color: var(--ink-1); }
 @media (prefers-reduced-motion: no-preference) {
 	.page-id-55 .history-timeline h2::before,
 	.page-id-55 .history-timeline h3::before { animation: nkkPulse 3s var(--ease) infinite; }
 }
 @keyframes nkkPulse {
-	0%, 100% { box-shadow: 0 0 0 4px var(--c-ink), 0 0 0 6px rgba(226,0,26,0.3), 0 0 12px rgba(226,0,26,0.5); }
-	50% { box-shadow: 0 0 0 4px var(--c-ink), 0 0 0 6px rgba(226,0,26,0.45), 0 0 20px rgba(226,0,26,0.8); }
+	0%, 100% { box-shadow: 0 0 0 4px var(--surface), 0 0 0 6px rgba(226,0,26,0.3), 0 0 12px rgba(226,0,26,0.5); }
+	50% { box-shadow: 0 0 0 4px var(--surface), 0 0 0 6px rgba(226,0,26,0.45), 0 0 20px rgba(226,0,26,0.8); }
 }
 
 /* ---------- Arhiv lestvic po sezonah ---------- */
@@ -1517,19 +1554,19 @@ a.sponsor-logo { cursor: pointer; }
 
 /* ---------- Uprava: organi kluba ---------- */
 .org-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin: 1.4rem 0 2rem; }
-.org-card { padding: 1.3rem 1.4rem; background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); }
-.org-card h3 { margin: 0 0 0.5rem; font-size: 1.1rem; color: var(--c-red-text); }
-.org-card p { margin: 0; color: #cfd2da; font-size: 0.95rem; }
-.readmore-note { margin: 1rem 0; padding: 0.9rem 1.1rem; background: rgba(255,255,255,0.04); border-radius: 10px; color: var(--c-gray-500); }
+.org-card { padding: 1.3rem 1.4rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.org-card h3 { margin: 0 0 0.5rem; font-size: 1.1rem; color: var(--link); }
+.org-card p { margin: 0; color: var(--ink-2); font-size: 0.95rem; }
+.readmore-note { margin: 1rem 0; padding: 0.9rem 1.1rem; background: var(--surface-2); border-radius: 10px; color: var(--muted); }
 
 /* ---------- Hero ekipe: favoriziraj vrh slike (glave niso odrezane) ---------- */
 body.single-ekipa .single__media { background-position: center 18%; }
 
 /* ---------- Prazna postava ekipe (namerno, ne golo) ---------- */
 .team-empty { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(1.2rem, 4vw, 2.6rem); align-items: center;
-  background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); overflow: hidden; }
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
 .team-empty__photo img { display: block; width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3; }
 .team-empty__text { padding: clamp(1.4rem, 4vw, 2.4rem) clamp(1.4rem, 4vw, 2.2rem); }
-.team-empty__text h3 { margin: 0 0 0.6rem; font-size: clamp(1.2rem, 3vw, 1.6rem); color: #fff; text-transform: uppercase; }
-.team-empty__text p { color: var(--c-gray-500); margin: 0 0 1.2rem; }
+.team-empty__text h3 { margin: 0 0 0.6rem; font-size: clamp(1.2rem, 3vw, 1.6rem); color: var(--ink-1); text-transform: uppercase; }
+.team-empty__text p { color: var(--muted); margin: 0 0 1.2rem; }
 @media (max-width: 700px){ .team-empty { grid-template-columns: 1fr; } }
