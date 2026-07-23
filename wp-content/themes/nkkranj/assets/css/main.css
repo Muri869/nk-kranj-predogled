@@ -5,8 +5,8 @@
 
 /* ---------- Tokeni ---------- */
 :root {
-	--c-red: #e2001a;
-	--c-red-dark: #b30015;
+	--c-red: #d4031e; /* rdeča iz klubskega grba (vzorčeno) */
+	--c-red-dark: #a50217; /* temnejši odtenek grbove rdeče (hover, konec preliva) */
 	--c-ink: #0b0c10;
 	--c-ink-soft: #15171f;
 	--c-white: #ffffff;
@@ -108,6 +108,8 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
 	display: flex; align-items: center;
 	transition: background 0.3s var(--ease), box-shadow 0.3s var(--ease), height 0.3s var(--ease);
 	background: linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0));
+	/* Tanka klubska rdeča linija na vrhu — diskreten rdeč poudarek na vsaki strani. */
+	border-top: 3px solid var(--c-red);
 }
 .site-header.is-stuck {
 	height: 62px;
@@ -235,7 +237,7 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
 .hero-carousel__tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; padding: 1.4rem 0 1.8rem; }
 .hero-tab { position: relative; display: flex; align-items: center; gap: 0.85rem; padding: 0.9rem 1rem; text-align: left; background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; cursor: pointer; transition: border-color 0.3s var(--ease), background 0.3s var(--ease); }
 .hero-tab:hover { background: #1c1f29; }
-.hero-tab.is-active { border-color: rgba(226,0,26,0.35); }
+.hero-tab.is-active { border-color: rgba(212,3,30,0.35); }
 /* Napredek: rdeča črta, ki teče OKOLI celotne zaobljene kartice. */
 .hero-tab__ring { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 .hero-tab__ring rect { x: 1px; y: 1px; width: calc(100% - 2px); height: calc(100% - 2px); fill: none; stroke: var(--c-red); stroke-width: 3; stroke-dasharray: 100; stroke-dashoffset: 100; }
@@ -296,7 +298,7 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
 .match-center .match-carousel__arrow { background: var(--c-white); color: var(--c-red); }
 .match-center .match-carousel__arrow:hover { background: var(--c-ink); color: var(--c-white); }
 .match-center__head { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.8rem; }
-@keyframes nkkPulse { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(226,0,26,0.5); } 50% { opacity: 0.6; box-shadow: 0 0 0 5px rgba(226,0,26,0); } }
+@keyframes nkkPulse { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(212,3,30,0.5); } 50% { opacity: 0.6; box-shadow: 0 0 0 5px rgba(212,3,30,0); } }
 
 /* Odštevalnik */
 .countdown { display: flex; flex-direction: column; gap: 0.8rem; }
@@ -313,7 +315,7 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
 .match-carousel__track { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-bottom: 0.25rem; }
 .match-carousel__track::-webkit-scrollbar { display: none; }
 .fixture-card { scroll-snap-align: start; flex: 0 0 clamp(280px, 32%, 360px); display: flex; gap: 1rem; align-items: stretch; background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-xl); overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.25); transition: border-color 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.35s var(--ease); }
-.fixture-card:hover { border-color: rgba(226,0,26,0.55); transform: translateY(-3px); box-shadow: 0 16px 34px rgba(0,0,0,0.4); }
+.fixture-card:hover { border-color: rgba(212,3,30,0.55); transform: translateY(-3px); box-shadow: 0 16px 34px rgba(0,0,0,0.4); }
 /* Navpičen pas "DOMA / V GOSTEH" namesto prejšnje generične žoge: navijača
    najprej zanima, ali gre lahko gledat. Domača tekma je rdeča (naša), gostujoča
    pridušena — razlika je vidna v hipu, brez branja. */
@@ -480,7 +482,7 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
 .entry-content th { font-family: var(--font-head); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.04em; color: #fff; background: rgba(255,255,255,0.05); }
 /* Arhivske lestvice (zgodovina) berljivejše: zebra črte + poudarek vrstice. */
 .entry-content tbody tr:nth-child(even) { background: rgba(255,255,255,0.025); }
-.entry-content tbody tr:hover { background: rgba(226,0,26,0.07); }
+.entry-content tbody tr:hover { background: rgba(212,3,30,0.07); }
 
 /* Vdelave (YouTube ...) — okvir določa mere, ne atributi iz urejevalnika. */
 .entry-content .nkk-embed { position: relative; margin-block: 1.5rem; width: 100%; background: #000; border-radius: var(--radius); overflow: hidden; }
@@ -536,7 +538,7 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
    naslovom čez obraze. Po vzoru obstoječe nkkranj.si. */
 .news-list { display: flex; flex-direction: column; gap: 1.1rem; }
 .news-row { background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); overflow: hidden; transition: transform 0.25s var(--ease), border-color 0.25s var(--ease); }
-.news-row:hover { transform: translateY(-2px); border-color: rgba(226,0,26,0.4); }
+.news-row:hover { transform: translateY(-2px); border-color: rgba(212,3,30,0.4); }
 .news-row__link { display: grid; grid-template-columns: clamp(200px, 34%, 340px) 1fr; gap: 0; align-items: stretch; color: inherit; }
 .news-row__media { position: relative; overflow: hidden; }
 .news-row__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease); }
@@ -676,8 +678,8 @@ img.is-logo { object-fit: contain !important; background: var(--c-ink-soft); pad
 a.sponsor-logo { cursor: pointer; }
 /* Glavni sponzor — vizualno izpostavljen (brez napisa »glavni sponzor«):
    močnejša senca/rdeč sij, rdeč rob, večja ploščica in poudarjeno ime. */
-.sponsor-logo--featured { height: auto; min-height: 96px; padding: 1rem 1.7rem 1.1rem; border: 2px solid var(--c-red); box-shadow: 0 14px 34px rgba(226,0,26,0.32), 0 0 0 1px rgba(226,0,26,0.25); transform: scale(1.04); }
-.sponsor-logo--featured:hover { transform: scale(1.04) translateY(-4px); box-shadow: 0 20px 44px rgba(226,0,26,0.4); }
+.sponsor-logo--featured { height: auto; min-height: 96px; padding: 1rem 1.7rem 1.1rem; border: 2px solid var(--c-red); box-shadow: 0 14px 34px rgba(212,3,30,0.32), 0 0 0 1px rgba(212,3,30,0.25); transform: scale(1.04); }
+.sponsor-logo--featured:hover { transform: scale(1.04) translateY(-4px); box-shadow: 0 20px 44px rgba(212,3,30,0.4); }
 .sponsor-logo--featured.sponsor-logo--dark { background: linear-gradient(180deg, #23151a, var(--c-ink-soft)); }
 .sponsor-logo--featured img { max-height: 60px; }
 .sponsor-logo__name { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.86rem; font-weight: 600; color: #fff; }
@@ -758,7 +760,7 @@ a.sponsor-logo { cursor: pointer; }
 /* Noga ni črna praznina: svoj pas z blagim gradientom, mehkim rdečim žarometnim
    sijem pri vrhu in medlim klubskim grbom kot teksturo. Vse zadržano. */
 .site-footer { position: relative; overflow: hidden; color: var(--c-gray-200); background: linear-gradient(180deg, #0e1016 0%, var(--c-ink) 55%); border-top: 1px solid rgba(255,255,255,0.07); }
-.site-footer::before { content: ""; position: absolute; top: 0; left: 50%; width: min(1100px, 92%); height: 340px; transform: translateX(-50%); background: radial-gradient(58% 100% at 50% 0%, rgba(226,0,26,0.16), transparent 70%); pointer-events: none; }
+.site-footer::before { content: ""; position: absolute; top: 0; left: 50%; width: min(1100px, 92%); height: 340px; transform: translateX(-50%); background: radial-gradient(58% 100% at 50% 0%, rgba(212,3,30,0.16), transparent 70%); pointer-events: none; }
 .site-footer::after { content: ""; position: absolute; right: -70px; top: 30px; width: 360px; height: 360px; background: url('../img/crest.png') no-repeat center / contain; opacity: 0.05; pointer-events: none; }
 .site-footer__top, .site-footer__bottom { position: relative; z-index: 1; }
 /* 4 stolpci (znamka | razdelki | kontakt | koledar), vsi poravnani na vrh, da
@@ -853,7 +855,7 @@ a.sponsor-logo { cursor: pointer; }
 	position: fixed; top: 0; left: 0; z-index: 200; height: 3px; width: 100%;
 	background: var(--c-red); transform: scaleX(0); transform-origin: left;
 	transition: transform 0.1s linear; pointer-events: none;
-	box-shadow: 0 0 8px rgba(226, 0, 26, 0.6);
+	box-shadow: 0 0 8px rgba(212,3,30, 0.6);
 }
 
 /* 2) Hero naslov — "mask reveal" ob nalaganju */
@@ -1000,7 +1002,7 @@ a.sponsor-logo { cursor: pointer; }
 /* Vbrizgane fotografije v vsebinskih straneh — razbijejo steno besedila. */
 .page-figure { margin: 2.4rem 0; }
 .page-figure img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow-lg); }
-.entry-content blockquote { position: relative; background: rgba(226,0,26,0.06); border: 1px solid rgba(226,0,26,0.18); border-radius: var(--radius); padding: 1.6rem 1.6rem 1.6rem 3.4rem; margin-inline: 0; color: #fff; font-size: 1.12rem; }
+.entry-content blockquote { position: relative; background: rgba(212,3,30,0.06); border: 1px solid rgba(212,3,30,0.18); border-radius: var(--radius); padding: 1.6rem 1.6rem 1.6rem 3.4rem; margin-inline: 0; color: #fff; font-size: 1.12rem; }
 .entry-content blockquote::before { content: "\201C"; position: absolute; left: 0.9rem; top: 0.3rem; font-family: var(--font-head); font-size: 3rem; line-height: 1; color: var(--c-red); }
 .entry-content blockquote p:last-child { margin-bottom: 0; }
 .muted { color: var(--c-gray-500); }
@@ -1078,7 +1080,7 @@ a.sponsor-logo { cursor: pointer; }
 
 /* Roster igralcev */
 .team-coach { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1.4rem; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.04em; color: #fff; font-size: 1.05rem; }
-.team-coach__label { font-size: 0.7rem; letter-spacing: 0.14em; color: var(--c-red-text); border: 1px solid rgba(226,0,26,0.4); border-radius: 999px; padding: 0.25rem 0.7rem; }
+.team-coach__label { font-size: 0.7rem; letter-spacing: 0.14em; color: var(--c-red-text); border: 1px solid rgba(212,3,30,0.4); border-radius: 999px; padding: 0.25rem 0.7rem; }
 .roster { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
 .player-card { background: var(--c-ink-soft); border-radius: var(--radius); overflow: hidden; border: 1px solid rgba(255,255,255,0.06); transition: transform 0.3s var(--ease); }
 .player-card:hover { transform: translateY(-4px); }
@@ -1096,7 +1098,7 @@ a.sponsor-logo { cursor: pointer; }
 /* Tekme / semaforji */
 .fixtures { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 .fixture { display: flex; flex-direction: column; gap: 0.7rem; padding: 1.4rem 1.3rem; background: var(--c-ink-soft); border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.09); transition: transform 0.25s var(--ease), background 0.25s var(--ease), border-color 0.25s var(--ease); }
-.fixture:hover { transform: translateY(-3px); background: #1c1f29; border-color: rgba(226,0,26,0.4); }
+.fixture:hover { transform: translateY(-3px); background: #1c1f29; border-color: rgba(212,3,30,0.4); }
 .fixture__comp { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.72rem; color: var(--c-red-text); }
 .fixture__teams { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; font-family: var(--font-head); text-transform: uppercase; color: #fff; }
 .fixture__team { flex: 1; display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
@@ -1124,7 +1126,7 @@ a.sponsor-logo { cursor: pointer; }
 .lestvica__tabela tbody tr { border-top: 1px solid rgba(255,255,255,0.05); }
 .lestvica__tabela tbody tr:hover { background: rgba(255,255,255,0.03); }
 /* Naša vrstica: rdeč pas ob levem robu + poudarek, kot na fcbayern.com. */
-.lestvica__vrstica--nas { background: rgba(226,0,26,0.12); box-shadow: inset 3px 0 0 var(--c-red); }
+.lestvica__vrstica--nas { background: rgba(212,3,30,0.12); box-shadow: inset 3px 0 0 var(--c-red); }
 .lestvica__vrstica--nas .lestvica__ime,
 .lestvica__vrstica--nas .lestvica__mesto { color: #fff; }
 .lestvica__vir { margin: 0; padding: 0.7rem 1.3rem 1rem; font-size: 0.78rem; color: var(--c-gray-500); }
@@ -1137,7 +1139,7 @@ a.sponsor-logo { cursor: pointer; }
 .mlajse-card { position: relative; display: flex; flex-direction: column; gap: 0.5rem; padding: 1.4rem 1.4rem 1.2rem; min-height: 150px; background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.09); border-radius: var(--radius-md); overflow: hidden; color: inherit; box-shadow: 0 1px 2px rgba(0,0,0,0.25); transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.35s var(--ease); }
 /* Spodnja poudarna linija (namesto stranske črtice — čistejši, ne "side-stripe"). */
 .mlajse-card::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--c-red); transform: scaleX(0); transform-origin: left; transition: transform 0.35s var(--ease); }
-.mlajse-card:hover { transform: translateY(-4px); border-color: rgba(226,0,26,0.45); box-shadow: 0 18px 38px rgba(0,0,0,0.42); }
+.mlajse-card:hover { transform: translateY(-4px); border-color: rgba(212,3,30,0.45); box-shadow: 0 18px 38px rgba(0,0,0,0.42); }
 .mlajse-card:hover::after { transform: scaleX(1); }
 .mlajse-card__ime { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.4rem); line-height: 0.95; color: #fff; letter-spacing: 0.01em; }
 .mlajse-card__cta { font-family: var(--font-head); text-transform: uppercase; font-size: 0.78rem; letter-spacing: 0.05em; color: var(--c-red-text); margin-top: auto; }
@@ -1161,8 +1163,8 @@ a.sponsor-logo { cursor: pointer; }
 
 /* Kompaktni CTA pas na /tekme/ → podstran. */
 .mlajse-cta { position: relative; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.2rem; padding: clamp(1.4rem, 3vw, 2rem); background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.09); border-radius: var(--radius-lg); overflow: hidden; color: inherit; transition: transform 0.25s var(--ease), border-color 0.25s var(--ease); }
-.mlajse-cta::after { content: ""; position: absolute; inset: 0; background: radial-gradient(90% 140% at 100% 0%, rgba(226,0,26,0.14), transparent 55%); pointer-events: none; }
-.mlajse-cta:hover { transform: translateY(-2px); border-color: rgba(226,0,26,0.45); }
+.mlajse-cta::after { content: ""; position: absolute; inset: 0; background: radial-gradient(90% 140% at 100% 0%, rgba(212,3,30,0.14), transparent 55%); pointer-events: none; }
+.mlajse-cta:hover { transform: translateY(-2px); border-color: rgba(212,3,30,0.45); }
 .mlajse-cta__glava { position: relative; display: flex; flex-direction: column; gap: 0.25rem; }
 .mlajse-cta__naslov { font-family: var(--font-display); font-size: clamp(1.6rem, 4vw, 2.2rem); color: #fff; line-height: 1; }
 .mlajse-cta__pod { color: var(--c-gray-200); font-size: 0.92rem; }
@@ -1217,7 +1219,7 @@ a.sponsor-logo { cursor: pointer; }
 .lightbox__counter { position: absolute; bottom: 1.4rem; left: 50%; transform: translateX(-50%); font-family: var(--font-head); letter-spacing: 0.1em; font-size: 0.85rem; color: rgba(255,255,255,0.8); }
 
 /* Semafor posamezne tekme */
-.match-hero { padding-top: calc(var(--header-h) + clamp(3rem, 7vw, 5rem)); padding-bottom: clamp(2.5rem, 5vw, 4rem); background: linear-gradient(135deg, var(--c-red-dark), var(--c-ink) 75%); text-align: center; }
+.match-hero { padding-top: calc(var(--header-h) + clamp(3rem, 7vw, 5rem)); padding-bottom: clamp(2.5rem, 5vw, 4rem); background: linear-gradient(150deg, var(--c-red) 0%, var(--c-red-dark) 100%); text-align: center; }
 .match-hero__board { display: flex; align-items: center; justify-content: center; gap: clamp(1rem, 5vw, 3rem); margin-top: 1rem; }
 .match-hero__team { font-family: var(--font-head); text-transform: uppercase; font-size: clamp(1.4rem, 4vw, 2.6rem); color: #fff; flex: 1; }
 .match-hero__score { font-family: var(--font-head); font-size: clamp(2.5rem, 7vw, 4.5rem); color: #fff; }
@@ -1264,7 +1266,7 @@ a.sponsor-logo { cursor: pointer; }
 .nkkranj-form textarea:focus {
 	outline: none;
 	border-color: var(--c-red);
-	box-shadow: 0 0 0 3px rgba(226,0,26,0.18);
+	box-shadow: 0 0 0 3px rgba(212,3,30,0.18);
 }
 .nkkranj-form select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--c-gray-200) 50%), linear-gradient(135deg, var(--c-gray-200) 50%, transparent 50%); background-position: calc(100% - 18px) 1.15rem, calc(100% - 13px) 1.15rem; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 2.5rem; }
 .nkkranj-form button { justify-self: start; margin-top: 0.3rem; cursor: pointer; border: none; }
@@ -1301,7 +1303,7 @@ a.sponsor-logo { cursor: pointer; }
 .nkkranj-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form-notice { padding: 0.9rem 1.1rem; border-radius: var(--radius); margin-bottom: 1.4rem; font-size: 0.95rem; border: 1px solid transparent; }
 .form-notice--ok { background: rgba(34,160,90,0.12); border-color: rgba(34,160,90,0.5); color: #8ff0bb; }
-.form-notice--err { background: rgba(226,0,26,0.1); border-color: rgba(226,0,26,0.5); color: #ff9ba6; }
+.form-notice--err { background: rgba(212,3,30,0.1); border-color: rgba(212,3,30,0.5); color: #ff9ba6; }
 @media (max-width: 560px) {
 	.form-row { grid-template-columns: 1fr; }
 }
@@ -1331,7 +1333,7 @@ a.sponsor-logo { cursor: pointer; }
 
 /* ---------- Prazna stanja (vsebina še ni vnesena) ---------- */
 .empty-state { text-align: center; max-width: 540px; margin: 0 auto; padding: 3rem 1.6rem; background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; }
-.empty-state__icon { width: 56px; height: 56px; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(226,0,26,0.12); color: var(--c-red); }
+.empty-state__icon { width: 56px; height: 56px; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(212,3,30,0.12); color: var(--c-red); }
 .empty-state__icon svg { width: 28px; height: 28px; }
 .empty-state__title { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.05em; color: #fff; font-size: 1.15rem; margin: 0 0 0.4rem; }
 .empty-state p { margin: 0; color: var(--c-gray-500); }
@@ -1381,7 +1383,7 @@ a.sponsor-logo { cursor: pointer; }
 
 /* ---------- O klubu: osebna izkaznica + navigacija ---------- */
 .club-id { display: grid; grid-template-columns: auto 1fr; gap: clamp(1.2rem, 4vw, 2.6rem); align-items: center; margin: 2.4rem 0; padding: clamp(1.4rem, 4vw, 2.2rem); background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); }
-.club-id__badge { display: flex; flex-direction: column; align-items: center; justify-content: center; width: clamp(110px, 28vw, 150px); aspect-ratio: 1; border-radius: 50%; background: linear-gradient(150deg, var(--c-red), var(--c-red-dark)); box-shadow: 0 10px 30px rgba(226,0,26,0.25); }
+.club-id__badge { display: flex; flex-direction: column; align-items: center; justify-content: center; width: clamp(110px, 28vw, 150px); aspect-ratio: 1; border-radius: 50%; background: linear-gradient(150deg, var(--c-red), var(--c-red-dark)); box-shadow: 0 10px 30px rgba(212,3,30,0.25); }
 .club-id__year { font-family: var(--font-head); font-weight: 800; font-size: clamp(2rem, 6vw, 2.8rem); color: #fff; line-height: 1; }
 .club-id__label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.85); margin-top: 0.3rem; }
 .club-id__facts { margin: 0; display: grid; gap: 0; }
@@ -1394,7 +1396,7 @@ a.sponsor-logo { cursor: pointer; }
 .subpage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin: 2.4rem 0 1rem; }
 .subpage-card { position: relative; display: flex; flex-direction: column; gap: 0.3rem; padding: 1.3rem 1.4rem; background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); text-decoration: none; transition: transform 0.3s var(--ease), border-color 0.3s var(--ease); overflow: hidden; }
 .subpage-card::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--c-red); transform: scaleX(0); transform-origin: left; transition: transform 0.3s var(--ease); }
-.subpage-card:hover { transform: translateY(-3px); border-color: rgba(226,0,26,0.4); }
+.subpage-card:hover { transform: translateY(-3px); border-color: rgba(212,3,30,0.4); }
 .subpage-card:hover::before { transform: scaleX(1); }
 .subpage-card__title { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.02em; color: #fff; font-size: 1.1rem; }
 .subpage-card__desc { color: var(--c-gray-500); font-size: 0.9rem; }
@@ -1417,7 +1419,7 @@ a.sponsor-logo { cursor: pointer; }
 /* ---------- Prenosi dokumentov (PDF) ---------- */
 .doc-downloads { display: grid; gap: 0.7rem; margin: 1.5rem 0 2.4rem; }
 .doc-download { display: flex; align-items: center; gap: 1rem; padding: 0.95rem 1.2rem; background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); text-decoration: none; transition: transform 0.25s var(--ease), border-color 0.25s var(--ease); }
-.doc-download:hover { transform: translateY(-2px); border-color: rgba(226,0,26,0.4); }
+.doc-download:hover { transform: translateY(-2px); border-color: rgba(212,3,30,0.4); }
 .doc-download__icon { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 8px; background: var(--c-red); color: #fff; font-family: var(--font-head); font-size: 0.72rem; letter-spacing: 0.05em; }
 .doc-download__title { flex: 1; color: #fff; font-weight: 600; }
 .doc-download__arrow { color: var(--c-red); font-size: 1.3rem; transition: transform 0.25s var(--ease); }
@@ -1425,9 +1427,9 @@ a.sponsor-logo { cursor: pointer; }
 
 /* ---------- Časovnica zgodovine ---------- */
 .history-timeline { position: relative; padding-left: 2.4rem; }
-.history-timeline::before { content: ""; position: absolute; left: 6px; top: 0.6rem; bottom: 0.6rem; width: 2px; background: linear-gradient(to bottom, var(--c-red), rgba(226,0,26,0.15)); }
+.history-timeline::before { content: ""; position: absolute; left: 6px; top: 0.6rem; bottom: 0.6rem; width: 2px; background: linear-gradient(to bottom, var(--c-red), rgba(212,3,30,0.15)); }
 .history-timeline h2, .history-timeline h3 { position: relative; margin-top: 2.6rem; }
-.history-timeline h2::before, .history-timeline h3::before { content: ""; position: absolute; left: calc(-2.4rem + 1px); top: 0.35em; width: 13px; height: 13px; border-radius: 50%; background: var(--c-red); box-shadow: 0 0 0 4px var(--c-ink), 0 0 0 6px rgba(226,0,26,0.25); }
+.history-timeline h2::before, .history-timeline h3::before { content: ""; position: absolute; left: calc(-2.4rem + 1px); top: 0.35em; width: 13px; height: 13px; border-radius: 50%; background: var(--c-red); box-shadow: 0 0 0 4px var(--c-ink), 0 0 0 6px rgba(212,3,30,0.25); }
 .history-timeline > *:first-child { margin-top: 0; }
 @media (max-width: 560px) { .history-timeline { padding-left: 1.8rem; } .history-timeline h2::before, .history-timeline h3::before { left: calc(-1.8rem + 1px); } }
 
@@ -1461,10 +1463,10 @@ a.sponsor-logo { cursor: pointer; }
 }
 .page-id-55 .entry-content { position: relative; z-index: 1; }
 /* žareča rdeča os in mejniki */
-.page-id-55 .history-timeline::before { box-shadow: 0 0 18px rgba(226,0,26,0.45); }
+.page-id-55 .history-timeline::before { box-shadow: 0 0 18px rgba(212,3,30,0.45); }
 .page-id-55 .history-timeline h2::before,
 .page-id-55 .history-timeline h3::before {
-	box-shadow: 0 0 0 4px var(--c-ink), 0 0 0 6px rgba(226,0,26,0.3), 0 0 16px rgba(226,0,26,0.6);
+	box-shadow: 0 0 0 4px var(--c-ink), 0 0 0 6px rgba(212,3,30,0.3), 0 0 16px rgba(212,3,30,0.6);
 }
 /* uvodni podnaslov ("Z VAMI ŽE OD LETA 1973") kot žig kluba */
 .page-id-55 .history-timeline > h2:first-of-type,
@@ -1474,8 +1476,8 @@ a.sponsor-logo { cursor: pointer; }
 	.page-id-55 .history-timeline h3::before { animation: nkkPulse 3s var(--ease) infinite; }
 }
 @keyframes nkkPulse {
-	0%, 100% { box-shadow: 0 0 0 4px var(--c-ink), 0 0 0 6px rgba(226,0,26,0.3), 0 0 12px rgba(226,0,26,0.5); }
-	50% { box-shadow: 0 0 0 4px var(--c-ink), 0 0 0 6px rgba(226,0,26,0.45), 0 0 20px rgba(226,0,26,0.8); }
+	0%, 100% { box-shadow: 0 0 0 4px var(--c-ink), 0 0 0 6px rgba(212,3,30,0.3), 0 0 12px rgba(212,3,30,0.5); }
+	50% { box-shadow: 0 0 0 4px var(--c-ink), 0 0 0 6px rgba(212,3,30,0.45), 0 0 20px rgba(212,3,30,0.8); }
 }
 
 /* ---------- Arhiv lestvic po sezonah ---------- */
@@ -1485,12 +1487,16 @@ a.sponsor-logo { cursor: pointer; }
 .season-archive .readmore__content { max-height: 60vh; }
 
 /* ---------- Velik odštevalnik na arhivu tekem ---------- */
-.match-countdown-hero { position: relative; padding: clamp(2.4rem, 6vw, 4.5rem) 0; text-align: center; overflow: hidden; background: var(--c-ink-soft); border-block: 1px solid rgba(255,255,255,0.06); }
-.match-countdown-hero__bg { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 0%, rgba(226,0,26,0.20), transparent 60%); }
+.match-countdown-hero { position: relative; padding: clamp(2.4rem, 6vw, 4.5rem) 0; text-align: center; overflow: hidden; background: linear-gradient(150deg, var(--c-red) 0%, var(--c-red-dark) 100%); border-block: 1px solid rgba(255,255,255,0.12); }
+.match-countdown-hero__bg { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,0.12), transparent 60%); }
+/* Rdeč pas: rdeči/sivi elementi odštevalnika bi izginili → beli. */
+.match-countdown-hero .countdown__label, .match-countdown-hero .countdown__sep { color: var(--c-white); }
+.match-countdown-hero .countdown__label::before { background: var(--c-white); }
+.match-countdown-hero .countdown__lbl { color: rgba(255,255,255,0.82); }
 .match-countdown-hero__inner { position: relative; }
 .match-countdown-hero__teams { display: flex; align-items: center; justify-content: center; gap: clamp(0.9rem, 4vw, 3rem); flex-wrap: wrap; margin: 0.7rem 0 0.4rem; font-family: var(--font-head); text-transform: uppercase; color: #fff; font-size: clamp(1.5rem, 5vw, 3rem); line-height: 1; }
-.match-countdown-hero__vs { color: var(--c-red); font-size: 0.7em; }
-.match-countdown-hero__meta { color: var(--c-gray-500); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.85rem; margin: 0 0 0.4rem; }
+.match-countdown-hero__vs { color: var(--c-white); font-size: 0.7em; }
+.match-countdown-hero__meta { color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.85rem; margin: 0 0 0.4rem; }
 .countdown--big { display: inline-block; margin-top: 1.4rem; }
 .countdown--big .countdown__clock { justify-content: center; gap: clamp(0.4rem, 2vw, 1.2rem); }
 .countdown--big .countdown__num { font-size: clamp(2.4rem, 8vw, 4.6rem); }
