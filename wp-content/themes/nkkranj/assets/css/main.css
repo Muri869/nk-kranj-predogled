@@ -282,8 +282,15 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
 /* =====================================================================
    MATCH CENTER
    ===================================================================== */
-/* Rdeč pas (slog FC Bayern): naslednja tekma / rezultati na močni klubski rdeči. */
-.match-center { background: linear-gradient(150deg, var(--c-red) 0%, var(--c-red-dark) 100%); color: var(--c-white); position: relative; margin-top: -1px; padding: clamp(2.4rem, 5vw, 3.6rem) 0; }
+/* Rdeč pas (slog FC Bayern): rdeča prevleka čez medlo fotografijo igrišča —
+   globina, ne plosko rdeče (isti prijem kot pas nogometne šole). */
+.match-center {
+	background:
+		linear-gradient(150deg, rgba(212,3,30,0.90) 0%, rgba(140,2,20,0.94) 100%),
+		url('../img/stadium-1.jpg');
+	background-size: cover; background-position: center;
+	color: var(--c-white); position: relative; margin-top: -1px; padding: clamp(2.4rem, 5vw, 3.6rem) 0;
+}
 /* Elementi, ki so bili rdeči, bi na rdeči podlagi izginili → beli. Kartice ostanejo
    temne (črno na rdeči = klubski kontrast). */
 .match-center .eyebrow { color: var(--c-white); opacity: 0.9; }
@@ -418,7 +425,13 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
 .koledar--velik .koledar__mesec { font-size: 1.1rem; }
 .koledar--velik .koledar__stevilka { font-size: 0.95rem; }
 .koledar--velik .koledar__mreza th { font-size: 0.7rem; }
-.section--koledar { background: var(--c-ink-soft); color: var(--c-white); padding-block: clamp(2rem, 4vw, 3.5rem); }
+.section--koledar {
+	background:
+		linear-gradient(180deg, rgba(11,12,16,0.88) 0%, rgba(11,12,16,0.93) 100%),
+		url('../img/stadion-zarometi.jpg');
+	background-size: cover; background-position: center;
+	color: var(--c-white); padding-block: clamp(2rem, 4vw, 3.5rem);
+}
 .section--koledar .section__title { font-size: clamp(1.4rem, 2.5vw, 2rem); margin-bottom: 1.2rem; }
 @media (prefers-reduced-motion: reduce) {
 	.koledar__nav, .koledar__stevilka { transition: none; }
@@ -1219,7 +1232,7 @@ a.sponsor-logo { cursor: pointer; }
 .lightbox__counter { position: absolute; bottom: 1.4rem; left: 50%; transform: translateX(-50%); font-family: var(--font-head); letter-spacing: 0.1em; font-size: 0.85rem; color: rgba(255,255,255,0.8); }
 
 /* Semafor posamezne tekme */
-.match-hero { padding-top: calc(var(--header-h) + clamp(3rem, 7vw, 5rem)); padding-bottom: clamp(2.5rem, 5vw, 4rem); background: linear-gradient(150deg, var(--c-red) 0%, var(--c-red-dark) 100%); text-align: center; }
+.match-hero { padding-top: calc(var(--header-h) + clamp(3rem, 7vw, 5rem)); padding-bottom: clamp(2.5rem, 5vw, 4rem); background: linear-gradient(150deg, rgba(212,3,30,0.90) 0%, rgba(140,2,20,0.94) 100%), url('../img/stadium-1.jpg'); background-size: cover; background-position: center; text-align: center; }
 .match-hero__board { display: flex; align-items: center; justify-content: center; gap: clamp(1rem, 5vw, 3rem); margin-top: 1rem; }
 .match-hero__team { font-family: var(--font-head); text-transform: uppercase; font-size: clamp(1.4rem, 4vw, 2.6rem); color: #fff; flex: 1; }
 .match-hero__score { font-family: var(--font-head); font-size: clamp(2.5rem, 7vw, 4.5rem); color: #fff; }
@@ -1487,7 +1500,7 @@ a.sponsor-logo { cursor: pointer; }
 .season-archive .readmore__content { max-height: 60vh; }
 
 /* ---------- Velik odštevalnik na arhivu tekem ---------- */
-.match-countdown-hero { position: relative; padding: clamp(2.4rem, 6vw, 4.5rem) 0; text-align: center; overflow: hidden; background: linear-gradient(150deg, var(--c-red) 0%, var(--c-red-dark) 100%); border-block: 1px solid rgba(255,255,255,0.12); }
+.match-countdown-hero { position: relative; padding: clamp(2.4rem, 6vw, 4.5rem) 0; text-align: center; overflow: hidden; background: linear-gradient(150deg, rgba(212,3,30,0.90) 0%, rgba(140,2,20,0.94) 100%), url('../img/stadium-1.jpg'); background-size: cover; background-position: center; border-block: 1px solid rgba(255,255,255,0.12); }
 .match-countdown-hero__bg { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,0.12), transparent 60%); }
 /* Rdeč pas: rdeči/sivi elementi odštevalnika bi izginili → beli. */
 .match-countdown-hero .countdown__label, .match-countdown-hero .countdown__sep { color: var(--c-white); }
@@ -1625,7 +1638,13 @@ body {
    Da ritem v zgornjem delu ni ves črn: rezultati(rdeč)–novice(črno)–
    NE PREZRITE(rdeč)–selekcije(črno)–nog. šola(rdeč).
    ===================================================================== */
-.section--dont-miss { background: linear-gradient(150deg, var(--c-red) 0%, var(--c-red-dark) 100%); color: var(--c-white); }
+.section--dont-miss {
+	background:
+		linear-gradient(150deg, rgba(212,3,30,0.90) 0%, rgba(140,2,20,0.94) 100%),
+		url('../img/stadium-1.jpg');
+	background-size: cover; background-position: center;
+	color: var(--c-white);
+}
 .section--dont-miss .eyebrow { color: var(--c-white); opacity: 0.9; }
 .section--dont-miss .section__title::before { background: var(--c-white); }
 .section--dont-miss .section__title { text-shadow: none; }
@@ -1652,3 +1671,16 @@ body {
 }
 
 /* (Diagonalni rez odstranjen — deloval je kot napaka; rdeči pas ima raven rob.) */
+
+/* =====================================================================
+   RAZBITJE ČRNINE NA TEKMAH: medlo igrišče pod temno prevleko
+   Lestvica (in koledar zgoraj) dobita atmosfero stadiona pod žarometi —
+   niso več plosko črno/sivo. Temna kartica lestvice ostane berljiva.
+   ===================================================================== */
+.section--lestvica {
+	background:
+		linear-gradient(180deg, rgba(11,12,16,0.87) 0%, rgba(11,12,16,0.93) 100%),
+		url('../img/stadion-zarometi.jpg');
+	background-size: cover; background-position: center;
+	color: var(--c-white);
+}
