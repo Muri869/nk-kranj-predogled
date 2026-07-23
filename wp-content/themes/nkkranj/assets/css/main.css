@@ -1651,12 +1651,4 @@ body {
 	.hero-slide--branded::after { width: min(300px, 74vw); right: -12%; top: 34%; opacity: 0.12; }
 }
 
-/* 2) Rdeč diagonalni rez — zgornji rob pasu rezultatov je poševen in seže v
-   temni prostor nad seboj. Blago prekrivanje veže hero in rdeči pas. */
-.match-center {
-	--hero-cut: clamp(28px, 4.5vw, 60px);
-	clip-path: polygon(0 var(--hero-cut), 100% 0, 100% 100%, 0 100%);
-	padding-top: calc(clamp(2.4rem, 5vw, 3.6rem) + var(--hero-cut) * 0.7);
-	margin-top: calc(-1 * var(--hero-cut));
-	position: relative; z-index: 2;
-}
+/* (Diagonalni rez odstranjen — deloval je kot napaka; rdeči pas ima raven rob.) */
