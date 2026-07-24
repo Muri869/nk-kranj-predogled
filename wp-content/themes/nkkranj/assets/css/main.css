@@ -321,10 +321,9 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1
 .match-carousel { position: relative; }
 .match-carousel__track { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-bottom: 0.25rem; }
 /* Desni rob zbledi, da zadnja (delna) kartica ni ostro odrezana — bere kot
-   "več, podrsaj", ne kot napaka. Puščica (›) ostane zunaj traku, torej ostra. */
-@media (min-width: 641px) {
-	.match-carousel__track { -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 86%, transparent 99%); mask-image: linear-gradient(90deg, #000 0%, #000 86%, transparent 99%); }
-}
+   "več, podrsaj", ne kot napaka (velja tudi na mobilnem swipu). Puščica (›) je
+   zunaj traku, torej ostane ostra. */
+.match-carousel__track { -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 88%, transparent 100%); mask-image: linear-gradient(90deg, #000 0%, #000 88%, transparent 100%); }
 .match-carousel__track::-webkit-scrollbar { display: none; }
 .fixture-card { scroll-snap-align: start; flex: 0 0 clamp(280px, 32%, 360px); display: flex; gap: 1rem; align-items: stretch; background: var(--c-ink-soft); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-xl); overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.25); transition: border-color 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.35s var(--ease); }
 .fixture-card:hover { border-color: rgba(212,3,30,0.55); transform: translateY(-3px); box-shadow: 0 16px 34px rgba(0,0,0,0.4); }
@@ -751,7 +750,9 @@ a.sponsor-logo { cursor: pointer; }
 /* Naslov novice/strani manjši (kot hero na domači, po zgledu FC Bayern; prej do 4rem). */
 .single__title, .page__title { font-size: clamp(1.7rem, 3.4vw, 2.7rem); line-height: 1.05; }
 .entry-date { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.1em; color: var(--c-red-text); }
-.single__body, .page__body { max-width: 800px; padding: clamp(1.6rem, 3vw, 2.4rem) 0 clamp(2.5rem, 5vw, 4rem); }
+/* Vodoravni gutter OBVEZEN (prej 0): na mobilnem se je vsebina/obrazec dotikal roba
+   zaslona in se odrezal. Na namizju je stolpec še vedno omejen na 800px + rob. */
+.single__body, .page__body { max-width: calc(800px + 2 * var(--gutter)); padding: clamp(1.6rem, 3vw, 2.4rem) var(--gutter) clamp(2.5rem, 5vw, 4rem); }
 .page__head:not(.page__head--over) { padding-top: calc(var(--header-h) + 2.5rem); }
 .page__head:not(.page__head--over) .page__title { color: #fff; }
 .entry-content { font-size: 1.08rem; }
